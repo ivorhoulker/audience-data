@@ -24,7 +24,7 @@ function App() {
     }
   }, []);
   const questionsRef = firestore.collection("questions");
-  const query = questionsRef.orderBy("weighting").limit(9999);
+  const query = questionsRef.limit(9999);
 
   const [questions] = useCollectionData(query);
   const [answer, setAnswer] = useState("");

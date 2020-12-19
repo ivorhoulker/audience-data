@@ -1,13 +1,12 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+  apiKey: "AIzaSyCeI1M5PIyWg4uRuU1F2ubQvfNXt-gsDvo",
+  authDomain: "rooftop-audience-data.firebaseapp.com",
+  projectId: "rooftop-audience-data",
+  storageBucket: "rooftop-audience-data.appspot.com",
+  messagingSenderId: "641794281450",
+  appId: "1:641794281450:web:1088f70853ab17a4f52c93",
 };
 firebase.initializeApp(firebaseConfig);
 
