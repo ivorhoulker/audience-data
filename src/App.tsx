@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 
-import firebase from "./Firebase";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/analytics";
@@ -9,13 +8,18 @@ import "firebase/analytics";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import "./App.css";
+import QuestionComponent from "./components/Question";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
+import SetQuestions from "./routes/SetQuestions";
+import AnswerQuestions from "./routes/AnswerQuestions";
+import { auth } from "./Firebase";
 
-const firestore = firebase.firestore();
-const auth = firebase.auth();
-interface Question {
-  question: string;
-  weighting: number;
-}
 function App() {
   const [user] = useAuthState(auth);
   useEffect(() => {
@@ -23,24 +27,45 @@ function App() {
       auth.signInAnonymously();
     }
   }, []);
-  const questionsRef = firestore.collection("questions");
-  const query = questionsRef.limit(9999);
 
-  const [questions] = useCollectionData(query);
-  const [answer, setAnswer] = useState("");
-  console.log(questions);
-  const handleSubmit = () => {};
   return (
     <div className="App">
       <header className="App-header">
-        {questions &&
-          (questions as Question[]).map((q, i) => {
-            return <div key={i}>{q.question}</div>;
-          })}
+        <Router>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/set-questions">Set Questions</Link>
+            </li>
+            <li>
+              <Link to="/answer-questions">Answer Questions</Link>
+            </li>
+          </ul>
+          <Switch>
+            <Route exact path="/">
+              <div>Nuthin much</div>
+            </Route>
+            <Route
+              exact
+              path="/set-questions"
+              render={() => {
+                return user ? (
+                  <Redirect to="/set-questions" />
+                ) : (
+                  <Redirect to="/" />
+                );
+              }}
+            >
+              <SetQuestions />
+            </Route>
+            <Route exact path="/answer-questions">
+              <AnswerQuestions />
+            </Route>
+          </Switch>
+        </Router>
       </header>
-
-      <input value={answer} onChange={(e) => setAnswer(e.target.value)}></input>
-      <button onClick={handleSubmit}></button>
     </div>
   );
 }

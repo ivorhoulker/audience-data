@@ -6,7 +6,7 @@ service cloud.firestore {
       allow read, write: if false;
     }
     
-    match /messages/{docId} {
+    match /questions/{docId} {
  			allow read: if request.auth.uid != null;
       allow create: if canCreateMessage();
     }
