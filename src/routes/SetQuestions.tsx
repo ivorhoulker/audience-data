@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-import QuestionComponent from "../components/Question";
+import EditableQuestion from "../components/EditableQuestion";
 import { firestore } from "../Firebase";
 import "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Question } from "../types/Question";
+import QuestionsForm from "../components/QuestionsForm";
 
 interface Props {}
 
@@ -18,8 +19,11 @@ const SetQuestions: React.FC<Props> = ({}) => {
     questionsError,
   ] = useCollectionData<Question>(query);
 
-  console.log(questions);
-  const handleSubmit = () => {};
+  questions && console.log(questions);
+  const handleAddQuestion = () => {
+    //TODO
+    console.log("adding...");
+  };
   return (
     <>
       {questionsError && (
@@ -28,8 +32,11 @@ const SetQuestions: React.FC<Props> = ({}) => {
       {questionsLoading && <span>Collection: Loading...</span>}
       {questions &&
         questions.map((q, i) => {
-          return <QuestionComponent question={q} />;
+          return <EditableQuestion key={i} question={q} />;
         })}
+      <div>
+        <QuestionsForm />
+      </div>
     </>
   );
 };

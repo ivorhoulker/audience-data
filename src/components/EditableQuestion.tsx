@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Question as QuestionType } from "../types/Question";
 import { firestore, auth, timestamp } from "../Firebase";
 
-const QuestionComponent: React.FC<{ question: QuestionType }> = ({
+const EditableQuestion: React.FC<{ question: QuestionType }> = ({
   question,
 }) => {
   const [formValue, setFormValue] = useState("");
@@ -59,4 +59,4 @@ const QuestionComponent: React.FC<{ question: QuestionType }> = ({
   );
 };
 
-export default QuestionComponent;
+export default EditableQuestion;

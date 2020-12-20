@@ -8,7 +8,7 @@ import "firebase/analytics";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import "./App.css";
-import QuestionComponent from "./components/Question";
+import EditableQuestion from "./components/EditableQuestion";
 import {
   BrowserRouter as Router,
   Switch,

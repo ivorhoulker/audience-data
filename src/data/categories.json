@@ -1,0 +1,8 @@
+{
+  "economics": ["control", "regulation", "markets"],
+  "personal-freedom": ["freedom", "security", "truth"],
+  "culture": ["tradition", "progress", "freedom"],
+  "foreign-policy": ["imperialism", "isolationism", "globalism"],
+  "government": ["democracy", "authority", "minarchy"],
+  "equality": ["opportunity", "outcome", "burden"]
+}

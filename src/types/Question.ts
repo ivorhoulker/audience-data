@@ -17,6 +17,35 @@ export const Category = {
   EQUALITY: "equality",
 };
 
+export const Category2 = {
+  ECONOMICS: {
+    CONTROL: "control",
+    REGULATION: "regulation",
+    MARKETS: "markets",
+  },
+  PERSONAL_FREEDOM: {
+    FREEDOM: "freedom",
+    SECURITY: "security",
+    TRUTH: "truth",
+  },
+  CULTURE: { TRADITION: "tradition", PROGRESS: "progress", FREEDOM: "freedom" },
+  FOREIGN_POLICY: {
+    IMPERIALISM: "imperialism",
+    ISOLATIONISM: "isolationism",
+    GLOBALISM: "globalism",
+  },
+  GOVERNMENT: {
+    DEMOCRACY: "democracy",
+    AUTHORITY: "authority",
+    MINARCHY: "minarchy",
+  },
+  EQUALITY: {
+    OPPORTUNITY: "opportunity",
+    OUTCOME: "outcome",
+    BURDEN: "burden",
+  },
+};
+
 export const Subcategory = {
   CONTROL: "control",
   REGULATION: "regulation",
