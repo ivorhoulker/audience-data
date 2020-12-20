@@ -18,19 +18,39 @@ import {
 } from "react-router-dom";
 import SetQuestions from "./routes/SetQuestions";
 import AnswerQuestions from "./routes/AnswerQuestions";
-import { auth } from "./Firebase";
-
+import { auth, firestore } from "./Firebase";
+import sample from "./data/sample.json";
 function App() {
+  async function loadData() {
+    const questionsRef = firestore.collection("questions");
+    sample.forEach(async (data) => {
+      const snapshot = await questionsRef
+        .where("english", "==", data.english)
+        .get();
+      if (snapshot.empty) {
+        questionsRef.add(data);
+        // const question = snapshot.docs[0].data();
+        // rest of your code
+      }
+    });
+  }
+  async function signIn() {
+    if (!user) {
+      await auth.signInAnonymously();
+      //loadData updates firebase from the local /data, replacing by english string
+      //no need to call it unless reseeding the whole thing, save money on reads!
+      // loadData();
+    }
+  }
   const [user] = useAuthState(auth);
   useEffect(() => {
-    if (!user) {
-      auth.signInAnonymously();
-    }
+    signIn();
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
+        <div>{JSON.stringify(sample)}</div>
         <Router>
           <ul>
             <li>

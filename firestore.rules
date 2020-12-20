@@ -7,8 +7,8 @@ service cloud.firestore {
     }
     
     match /questions/{docId} {
- 			allow read: if request.auth.uid != null;
-      allow create: if canCreateMessage();
+ 			allow read, write, create: if request.auth.uid != null;
+     
     }
     match /answers/{docId} {
  			allow read: if request.auth.uid != null;

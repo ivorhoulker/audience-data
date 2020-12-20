@@ -1,7 +1,7 @@
 export interface Question {
-  question: string;
+  english: string;
   category: valueOf<typeof Category>;
-  inclination: string;
+  subcategory: valueOf<typeof Subcategory>;
   strength: number;
   multiplier: number;
 }
@@ -17,7 +17,7 @@ export const Category = {
   EQUALITY: "equality",
 };
 
-export const Inclination = {
+export const Subcategory = {
   CONTROL: "control",
   REGULATION: "regulation",
   MARKETS: "markets",
@@ -38,9 +38,9 @@ export const Inclination = {
 };
 
 const test: Question = {
-  question: "test",
+  english: "test",
   category: Category.ECONOMICS,
-  inclination: "test",
+  subcategory: Subcategory.CONTROL,
   strength: 1,
   multiplier: 2,
 };

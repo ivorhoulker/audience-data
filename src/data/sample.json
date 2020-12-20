@@ -1,0 +1,44 @@
+[
+  {
+    "category": "economics",
+    "subcategory": "control",
+    "strength": 4,
+    "multiplier": 1,
+    "english": "Most or all of the economy should be nationalized"
+  },
+  {
+    "category": "economics",
+    "subcategory": "control",
+    "strength": 4,
+    "multiplier": 1,
+    "english": "Capitalism should fundamentally be replaced"
+  },
+  {
+    "category": "economics",
+    "subcategory": "control",
+    "strength": 3,
+    "multiplier": 1,
+    "english": "There should be a national healthcare service"
+  },
+  {
+    "category": "economics",
+    "subcategory": "control",
+    "strength": 2,
+    "multiplier": -1,
+    "english": "Government owned industry is usually a bad idea"
+  },
+  {
+    "category": "economics",
+    "subcategory": "control",
+    "strength": 2,
+    "multiplier": 1,
+    "english": "The government should run the healthcare insurance industry"
+  },
+  {
+    "category": "economics",
+    "subcategory": "control",
+    "strength": 2,
+    "multiplier": 1,
+    "english": "Public utilities like roads and electricity should all be publicly owned"
+  }
+]
