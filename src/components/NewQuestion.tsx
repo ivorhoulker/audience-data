@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {}
 
-const NewQuestion: React.FC<Props> = ({}) => {
+const NewQuestion: React.FC<Props> = () => {
   return <></>;
 };
 

@@ -1,5 +1,7 @@
 export interface Question {
+  id?: string;
   english: string;
+  chinese?: string;
   category: valueOf<typeof Category>;
   subcategory: valueOf<typeof Subcategory>;
   strength: number;
@@ -66,11 +68,11 @@ export const Subcategory = {
   GLOBALISM: "globalism",
 };
 
-const test: Question = {
-  english: "test",
-  category: Category.ECONOMICS,
-  subcategory: Subcategory.CONTROL,
-  strength: 1,
-  multiplier: 2,
-};
-console.log(test);
+// const test: Question = {
+//   english: "test",
+//   category: Category.ECONOMICS,
+//   subcategory: Subcategory.CONTROL,
+//   strength: 1,
+//   multiplier: 2,
+// };
+// console.log(test);

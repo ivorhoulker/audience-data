@@ -18,12 +18,10 @@ const EditableQuestion: React.FC<{ question: QuestionType }> = ({
       uid,
     };
     if (doc.exists) {
-      const docId = await questionsRef
-        .doc("testID")
-        .set(content, { merge: true });
+      await questionsRef.doc("testID").set(content, { merge: true });
     } else {
       //ADD NEW DOC
-      questionsRef.add(content);
+      await questionsRef.add(content);
     }
 
     // await questionsRef.add({

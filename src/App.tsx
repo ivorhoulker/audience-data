@@ -50,7 +50,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div>{JSON.stringify(sample)}</div>
         <Router>
           <ul>
             <li>

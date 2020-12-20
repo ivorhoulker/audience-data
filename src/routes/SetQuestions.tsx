@@ -26,14 +26,14 @@ const SetQuestions: React.FC<Props> = ({}) => {
   };
   return (
     <>
-      {questionsError && (
+      {/* {questionsError && (
         <strong>Error: {JSON.stringify(questionsError)}</strong>
       )}
       {questionsLoading && <span>Collection: Loading...</span>}
       {questions &&
         questions.map((q, i) => {
           return <EditableQuestion key={i} question={q} />;
-        })}
+        })} */}
       <div>
         <QuestionsForm />
       </div>
