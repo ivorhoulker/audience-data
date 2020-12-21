@@ -19,7 +19,7 @@ import {
 import SetQuestions from "./routes/SetQuestions";
 import AnswerQuestions from "./routes/AnswerQuestions";
 import { auth, firestore } from "./Firebase";
-import sample from "./data/sample.json";
+import sample from "./data/questions-v3-test.json";
 function App() {
   async function loadData() {
     const questionsRef = firestore.collection("questions");

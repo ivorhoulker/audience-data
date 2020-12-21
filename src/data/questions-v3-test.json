@@ -1,0 +1,142 @@
+[
+  {
+    "category": "economics",
+    "strength": -4,
+    "english": "Most or all of the economy should be nationalized",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": -4,
+    "english": "Capitalism should fundamentally be replaced",
+    "chinese": ""
+  },
+
+  {
+    "category": "economics",
+    "strength": -2,
+    "english": "The government should run the healthcare insurance industry",
+    "chinese": ""
+  },
+
+  {
+    "category": "economics",
+    "strength": -3,
+    "english": "The market will always make the best product unless the government intervenes",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": -2,
+    "english": "Excessive government intervention hurts the economy",
+    "chinese": ""
+  },
+
+  {
+    "category": "culture",
+    "strength": 4,
+    "english": "Gay marriage should be illegal",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 4,
+    "english": "We should have a national religion",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 3,
+    "english": "Premarital sex should be illegal",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 3,
+    "english": "Religious values should be taught in all schools",
+    "chinese": ""
+  },
+
+  {
+    "category": "culture",
+    "strength": 2,
+    "english": "The media is biased against traditional values",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 2,
+    "english": "There are only 2 genders",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 1,
+    "english": "Murder and theft should be illegal",
+    "chinese": ""
+  },
+
+  {
+    "category": "culture",
+    "strength": -4,
+    "english": "The government should require people to eat healthy",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": -3,
+    "english": "Genetic modification research should be legal on humans",
+    "chinese": ""
+  },
+
+  {
+    "category": "government",
+    "strength": -4,
+    "english": "The government would be best if the people directly voted on most issues",
+    "chinese": ""
+  },
+
+  {
+    "category": "government",
+    "strength": -1,
+    "english": "The government must be by the people for the people",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 1,
+    "english": "Popular opinion is not always right",
+    "chinese": ""
+  },
+
+  {
+    "category": "government",
+    "strength": -1,
+    "english": "The government occasionally needs to do things which aren't popular for the good of its people",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": -2,
+    "english": "Society could not function without leaders and followers",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": -4,
+    "english": "A nation should obey its leadership without question",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": -4,
+    "english": "The government should not tolerate dissenting opinions",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 1,
+    "english": "People should question the actions of those in power",
+    "chinese": ""
+  }
+]

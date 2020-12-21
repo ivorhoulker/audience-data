@@ -34,7 +34,6 @@ const QuestionForm: React.FC<Props> = ({ question }) => {
   } = useForm<Question>({
     resolver: yupResolver(schema),
   });
-  const [category, setCategory] = useState("economics");
 
   const questionsRef = firestore.collection("questions");
   const { uid } = auth.currentUser!;
@@ -99,12 +98,7 @@ const QuestionForm: React.FC<Props> = ({ question }) => {
         <label className="form-label" htmlFor="category">
           Category
         </label>
-        <select
-          className="form-select"
-          name={`category`}
-          onChange={(e) => setCategory(getValues("category"))}
-          ref={register}
-        >
+        <select className="form-select" name={`category`} ref={register}>
           <option value="">Select...</option>
           {Object.keys(categories).map((key, i) => {
             return (
@@ -115,25 +109,7 @@ const QuestionForm: React.FC<Props> = ({ question }) => {
           })}
         </select>
       </div>
-      <div className="col-md-6">
-        <label className="form-label" htmlFor="subcategory">
-          Subcategory
-        </label>
-        <select className="form-select" name={`subcategory`} ref={register}>
-          <option value="">Select...</option>
-          {categories[category as keyof typeof categories].map((value, i) => {
-            return (
-              <option
-                selected={question.subcategory === value}
-                key={i}
-                value={value}
-              >
-                {sentenceCase(value)}
-              </option>
-            );
-          })}
-        </select>
-      </div>
+
       <div className="col-md-6">
         <label className="form-label" htmlFor="strength">
           Strength
@@ -145,25 +121,6 @@ const QuestionForm: React.FC<Props> = ({ question }) => {
           ref={register}
           defaultValue={question.strength.toString() ?? ""}
         />
-      </div>
-      <div className="col-md-6">
-        <label className="form-label" htmlFor="multiplier">
-          Multiplier
-        </label>
-        <select className="form-select" name={`multiplier`} ref={register}>
-          <option value="">Select...</option>
-          {[1, -1].map((value, i) => {
-            return (
-              <option
-                selected={question.multiplier === value}
-                key={i}
-                value={value}
-              >
-                {value}
-              </option>
-            );
-          })}
-        </select>
       </div>
 
       <div className="col-12">

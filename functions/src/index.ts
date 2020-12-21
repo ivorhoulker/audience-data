@@ -4,16 +4,24 @@ const cors = require("cors");
 const app = express();
 const router = express.Router();
 
-router.get("/results", (_req, res) => {
-  res.send(
-    JSON.stringify({
-      english: "test",
-      category: "economics",
-      subcategory: "control",
-      strength: 1,
-      multiplier: 2,
-    })
-  );
+router.get("/results", (req, res) => {
+  let key = req.query.key;
+  if (!key) {
+    key = req.body.key;
+  }
+  if (key === "kanye") {
+    res.send(
+      JSON.stringify({
+        english: "test",
+        category: "economics",
+        subcategory: "control",
+        strength: 1,
+        multiplier: 2,
+      })
+    );
+  } else {
+    res.send(JSON.stringify({ error: "No REST for the wicked" }));
+  }
 });
 app.use(cors());
 app.use("/api", router);
