@@ -1,0 +1,488 @@
+[
+  {
+    "category": "economics",
+    "strength": 4,
+    "english": "Most or all of the economy should be nationalized",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 4,
+    "english": "Capitalism should fundamentally be replaced",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 3,
+    "english": "There should be a national healthcare service",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": -2,
+    "english": "Government owned industry is usually a bad idea",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 2,
+    "english": "The government should run the healthcare insurance industry",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 2,
+    "english": "Public utilities like roads and electricity should all be publicly owned",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 1,
+    "english": "Capitalism has problems",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 1,
+    "english": "Some industries such as the postal service should be government-run",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": -1,
+    "english": "Regulation cannot fix all problems in the economy",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 4,
+    "english": "Strictly regulated capitalism is the ideal economy",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 3,
+    "english": "For any economic problem, there is a regulation that can fix it",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 3,
+    "english": "Companies that sneakily break regulations and are caught should be disbanded",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 2,
+    "english": "The government must regulate the economy to protect the environment",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 2,
+    "english": "The government is needed to break up monopolies and ensure there is fair competition",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": -3,
+    "english": "Government regulations rarely completely solve the problem they intended to fix",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 1,
+    "english": "The economy should consist of private companies with some regulations to ensure fair competition",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 1,
+    "english": "Consumer protection laws to ensure products are safe are important",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 4,
+    "english": "The government should not regulate the economy at all",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 4,
+    "english": "Everything that can be left to the free market should be",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 3,
+    "english": "The government should never break up a company",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 3,
+    "english": "Government intervention in the economy almost always makes the economy worse",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 3,
+    "english": "The market will always make the best product unless the government intervenes",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 2,
+    "english": "Excessive government intervention hurts the economy",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": -3,
+    "english": "Oppression by corporations is a much more real threat than oppression by the government",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 1,
+    "english": "Competition generally makes the economy better",
+    "chinese": ""
+  },
+  {
+    "category": "economics",
+    "strength": 1,
+    "english": "Capitalism is better than any existing alternative",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": -4,
+    "english": "Gay marriage should be illegal",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": -4,
+    "english": "We should have a national religion",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": -3,
+    "english": "Premarital sex should be illegal",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": -3,
+    "english": "Religious values should be taught in all schools",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 2,
+    "english": "People should be able to volunteer for experimental treatments when they have no treatment and will die if they do not",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": -2,
+    "english": "It is important to maintain family values",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": -2,
+    "english": "We should have a national language and all immigrants should be required to speak it",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": -2,
+    "english": "The media is biased against traditional values",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": -2,
+    "english": "There are only 2 genders",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": -1,
+    "english": "Murder and theft should be illegal",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 4,
+    "english": "Abortion should always be legal",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 2,
+    "english": "It should be legal to alter your infant's DNA to make them stronger, smarter, etc.",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 4,
+    "english": "If AI can govern better than humans can, then AI should rule",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 4,
+    "english": "Cars should be banned to protect the environment",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 4,
+    "english": "The government should require people to eat healthy",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 3,
+    "english": "Genetic modification research should be legal on humans",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 3,
+    "english": "Guns should be banned for the general population",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 3,
+    "english": "There should be a limit to how many children a person may have to prevent overcrowding the Earth",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 3,
+    "english": "Private jets should be banned",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 2,
+    "english": "Plastic straws should be banned",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 2,
+    "english": "We should put effort into expanding civilization beyond earth",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 1,
+    "english": "Climate change is a real threat",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 1,
+    "english": "Technological progress is always good",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 1,
+    "english": "Automation has the potential to give significant benefits to humanity",
+    "chinese": ""
+  },
+  {
+    "category": "culture",
+    "strength": 1,
+    "english": "Evolution should be taught in schools",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 4,
+    "english": "The government would be best if the people directly voted on most issues",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 4,
+    "english": "Trials would be better if put directly to popular vote",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 3,
+    "english": "The government should almost always follow the majority opinion",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 3,
+    "english": "The population as a whole tends to make good decisions",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 2,
+    "english": "A country without fair elections cannot be a good country",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 2,
+    "english": "Each person should have an identically weighted vote",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 1,
+    "english": "People should have the power to choose their leaders",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 1,
+    "english": "The government must be by the people for the people",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": -1,
+    "english": "Popular opinion is not always right",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": -2,
+    "english": "Democracy often allows the majority to infringe on the rights of those who dissent",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": -3,
+    "english": "Popular opinion should have little influence on government policy",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": -4,
+    "english": "My country should not have elections or votes",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 1,
+    "english": "A nation must have strong leadership to be successful",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 1,
+    "english": "The government occasionally needs to do things which aren't popular for the good of its people",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 2,
+    "english": "Society could not function without leaders and followers",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 2,
+    "english": "Society requires that some people must have power over others to function",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 3,
+    "english": "If given the chance, I would implement my ideology in my country, even if most people were against it",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 3,
+    "english": "People who get into power should keep power until they are forced to give it up",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 4,
+    "english": "A nation should obey its leadership without question",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 4,
+    "english": "The government should not tolerate dissenting opinions",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": -1,
+    "english": "People should question the actions of those in power",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 1,
+    "english": "The government is larger than it needs to be",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 1,
+    "english": "The government has too much power",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 2,
+    "english": "I do not trust the government to look after my interests",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 2,
+    "english": "Small government is usually better than big government",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 3,
+    "english": "There can never be a government without corruption",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 3,
+    "english": "The population can protect itself better than the government can protect it",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 4,
+    "english": "The government should have no say in how people live their lives",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": 4,
+    "english": "People would be better off without a government",
+    "chinese": ""
+  },
+  {
+    "category": "government",
+    "strength": -1,
+    "english": "A government provides some important services for the population",
+    "chinese": ""
+  }
+]

@@ -1,1 +1,6 @@
-["strongly-agree", "agree", "disagree", "strongly-disagree"]
+[
+  { "key": "strongly-agree", "value": 2 },
+  { "key": "agree", "value": 1 },
+  { "key": "disagree", "value": -1 },
+  { "key": "strongly-disagree", "value": -2 }
+]
