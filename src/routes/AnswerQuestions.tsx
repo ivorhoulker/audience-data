@@ -1,10 +1,6 @@
 import React from "react";
 import AnswerForm from "../components/AnswerForm";
-import {
-  useFirebase,
-  useFirestore,
-  useFirestoreConnect,
-} from "react-redux-firebase";
+import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { Question } from "../types/Question";

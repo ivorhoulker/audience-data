@@ -1,18 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
-import EditableQuestion from "../components/EditableQuestion";
-
-import firebase from "firebase/app";
-import {
-  useCollectionData,
-  useCollection,
-} from "react-firebase-hooks/firestore";
 import { Question } from "../types/Question";
 
-import { sentenceCase } from "../helpers/sentenceCase";
 import AnswerGroup from "./AnswerGroup";
-import { useSelector } from "react-redux";
-import { RootState } from "../app/store";
 interface Props {
   questions: Question[];
 }

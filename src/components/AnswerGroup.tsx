@@ -20,9 +20,9 @@ const AnswerGroup: React.FC<Props> = ({ question }) => {
   const currentAnswers = useSelector<RootState>(
     (state) => state.firestore.ordered.answers
   ) as Answer[];
-  const [defaults, setDefaults] = useState({});
+
   const [loaded, setLoaded] = useState(false);
-  const { register, reset, handleSubmit, watch, errors, getValues } = useForm();
+  const { register, reset, getValues } = useForm();
   useEffect(() => {
     console.log("uid", currentAnswers);
     if (currentAnswers && uid) {
@@ -39,7 +39,6 @@ const AnswerGroup: React.FC<Props> = ({ question }) => {
   }, [uid, currentAnswers, loaded, question.id, reset]);
   //   const value = (currentAnswers as Answer[]).find((a) => a.id === uid);
 
-  async function createQuestion() {}
   const handleChange = async () => {
     if (typeof uid === "string") {
       const values = getValues();

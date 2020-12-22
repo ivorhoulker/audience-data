@@ -5,15 +5,12 @@ import {
   Action,
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
-import { Reducer } from "redux";
 import {
   Data,
   Dictionary,
   FirebaseReducer,
   firebaseReducer,
-  FirestoreReducer,
   Listeners,
-  Ordered,
   ReduxFirestoreQuerySetting,
   getFirebase,
   actionTypes as rrfActionTypes,
