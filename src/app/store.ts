@@ -19,6 +19,7 @@ import {
   actionTypes as rrfActionTypes,
 } from "react-redux-firebase";
 import { firestoreReducer, constants as rfConstants } from "redux-firestore";
+import Answer from "../types/Answer";
 // Optional: If you use the user profile option
 
 interface Profile {
@@ -29,6 +30,7 @@ interface Profile {
 // This will give you type-checking for state.firebase.data.todos and state.firebase.ordered.todos
 interface FirestoreSchema {
   questions: Question[];
+  answers: Answer[];
 }
 interface FirebaseSchema {}
 
@@ -82,6 +84,14 @@ export const store = configureStore({
   middleware,
 });
 
+// if (process.env.NODE_ENV === "development" && module.hot) {
+//   module.hot.accept("./rootReducer", () => {
+//     const newRootReducer = require("./rootReducer").default;
+//     store.replaceReducer(newRootReducer);
+//   });
+// }
+
+export type AppDispatch = typeof store.dispatch;
 // export type RootState = ReturnType<typeof store.getState>;
 export interface RootState {
   firebase: FirebaseReducer.Reducer<Profile, FirebaseSchema>;

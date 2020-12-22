@@ -9,36 +9,15 @@ import {
 } from "react-firebase-hooks/firestore";
 import { Question } from "../types/Question";
 
-import answers from "../data/answers.json";
 import { sentenceCase } from "../helpers/sentenceCase";
+import AnswerGroup from "./AnswerGroup";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
 interface Props {
   questions: Question[];
 }
 
 const AnswerQuestions: React.FC<Props> = ({ questions }) => {
-  //   const questionsRef = firestore.collection("questions");
-  //   const query = questionsRef.limit(9999);
-
-  //   const [
-  //     questions,
-  //     questionsLoading,
-  //     questionsError,
-  //   ] = useCollectionData<Question>(query);
-
-  //   questions && console.log(questions);
-  // const handleAddQuestion = () => {
-  //   //TODO
-  //   console.log("adding...");
-  // };
-  // const questionsRef = firestore.collection("questions");
-  // const query = questionsRef.limit(9999);
-
-  // const [q, qLoading, qError] = useCollection(query);
-  // const questions: Question[] =
-  //   q &&
-  //   (q as firebase.firestore.QuerySnapshot).docs.map((doc) => {
-  //     return { ...(doc.data() as Question), id: doc.id };
-  //   });
   return (
     <>
       {/* {questionsError && (
@@ -58,27 +37,7 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
                   <div className="col-md-6">
                     <blockquote>{question.english}</blockquote>
 
-                    <div role="radiogroup" className="btn-group">
-                      {answers.map((answer, i) => {
-                        return (
-                          <React.Fragment key={i}>
-                            <input
-                              type="radio"
-                              className="btn-check"
-                              id={question.id + answer.key}
-                              name={question.id}
-                              autoComplete="off"
-                            />
-                            <label
-                              className="btn btn-secondary"
-                              htmlFor={question.id + answer.key}
-                            >
-                              {sentenceCase(answer.key)}
-                            </label>
-                          </React.Fragment>
-                        );
-                      })}
-                    </div>
+                    <AnswerGroup question={question}></AnswerGroup>
                   </div>
                 </div>
               </div>
