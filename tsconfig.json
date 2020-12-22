@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "nodeJsonEditor.js"]
+  "include": ["src", "nodeJsonEditor.js", "craco.config.js", "Firebase.ts"]
 }

@@ -5,6 +5,9 @@ service cloud.firestore {
     match /{document=**} {
       allow read, write: if false;
     }
+     match /users/{docId} {
+      allow read, write, create: if true;
+    }
     
     match /questions/{docId} {
  			allow read, write, create: if request.auth.uid != null;

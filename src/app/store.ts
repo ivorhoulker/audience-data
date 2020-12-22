@@ -1,0 +1,95 @@
+import { Question } from "./../types/Question";
+import {
+  configureStore,
+  ThunkAction,
+  Action,
+  getDefaultMiddleware,
+} from "@reduxjs/toolkit";
+import { Reducer } from "redux";
+import {
+  Data,
+  Dictionary,
+  FirebaseReducer,
+  firebaseReducer,
+  FirestoreReducer,
+  Listeners,
+  Ordered,
+  ReduxFirestoreQuerySetting,
+  getFirebase,
+  actionTypes as rrfActionTypes,
+} from "react-redux-firebase";
+import { firestoreReducer, constants as rfConstants } from "redux-firestore";
+// Optional: If you use the user profile option
+
+interface Profile {
+  name: string;
+  email: string;
+}
+
+// This will give you type-checking for state.firebase.data.todos and state.firebase.ordered.todos
+interface FirestoreSchema {
+  questions: Question[];
+}
+interface FirebaseSchema {}
+
+export interface CustomFirestoreReducer<
+  Schema extends Record<string, any> = {}
+> {
+  composite?: Data<any | Dictionary<any>>;
+  data: { [T in keyof Schema]: Record<string, Schema[T]> };
+  errors: {
+    allIds: string[];
+    byQuery: any[];
+  };
+  listeners: Listeners;
+  ordered: {
+    [T in keyof Schema]: Array<{ key: string; value: Schema[T] }>;
+  };
+  queries: Data<ReduxFirestoreQuerySetting & (Dictionary<any> | any)>;
+  status: {
+    requested: Dictionary<boolean>;
+    requesting: Dictionary<boolean>;
+    timestamps: Dictionary<number>;
+  };
+}
+const extraArgument = {
+  getFirebase,
+};
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [
+        // just ignore every redux-firebase and react-redux-firebase action type
+        ...Object.keys(rfConstants.actionTypes).map(
+          (type) => `${rfConstants.actionsPrefix}/${type}`
+        ),
+        ...Object.keys(rrfActionTypes).map(
+          (type) => `@@reactReduxFirebase/${type}`
+        ),
+      ],
+      ignoredPaths: ["firebase", "firestore"],
+    },
+    thunk: {
+      extraArgument,
+    },
+  }),
+];
+export const store = configureStore({
+  reducer: {
+    firebase: firebaseReducer,
+    firestore: firestoreReducer,
+  },
+  middleware,
+});
+
+// export type RootState = ReturnType<typeof store.getState>;
+export interface RootState {
+  firebase: FirebaseReducer.Reducer<Profile, FirebaseSchema>;
+  firestore: CustomFirestoreReducer<FirestoreSchema>;
+}
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;

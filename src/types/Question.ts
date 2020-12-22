@@ -1,7 +1,7 @@
 export interface Question {
-  id?: string;
+  id: string;
   english: string;
-  chinese?: string;
+  chinese: string;
   category: valueOf<typeof Category>;
   subcategory: valueOf<typeof Subcategory>;
   strength: number;
