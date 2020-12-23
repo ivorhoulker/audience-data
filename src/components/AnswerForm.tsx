@@ -1,4 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useFirestoreConnect } from "react-redux-firebase";
+import { RootState } from "../app/store";
+import Answer from "../types/Answer";
 
 import { Question } from "../types/Question";
 
@@ -8,6 +12,13 @@ interface Props {
 }
 
 const AnswerQuestions: React.FC<Props> = ({ questions }) => {
+  useFirestoreConnect([{ collection: "answers" }]);
+  const answers = useSelector<RootState>(
+    (state) => state.firestore.ordered.answers
+  ) as Answer[];
+  const uid = useSelector<RootState>(
+    (state) => state.firebase.auth.uid
+  ) as string;
   return (
     <>
       {/* {questionsError && (
@@ -27,7 +38,13 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
                   <div className="col-md-6">
                     <blockquote>{question.english}</blockquote>
 
-                    <AnswerGroup question={question}></AnswerGroup>
+                    {uid && answers && (
+                      <AnswerGroup
+                        question={question}
+                        uid={uid}
+                        answers={answers}
+                      ></AnswerGroup>
+                    )}
                   </div>
                 </div>
               </div>

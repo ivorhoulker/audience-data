@@ -20,8 +20,9 @@ import Answer from "../types/Answer";
 // Optional: If you use the user profile option
 
 interface Profile {
-  name: string;
-  email: string;
+  // name: string;
+  // email: string;
+  uid: string;
 }
 
 // This will give you type-checking for state.firebase.data.todos and state.firebase.ordered.todos
@@ -29,7 +30,9 @@ interface FirestoreSchema {
   questions: Question[];
   answers: Answer[];
 }
-interface FirebaseSchema {}
+interface FirebaseSchema {
+  auth: { uid: string };
+}
 
 export interface CustomFirestoreReducer<
   Schema extends Record<string, any> = {}

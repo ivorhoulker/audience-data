@@ -1,53 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { sentenceCase } from "../helpers/sentenceCase";
 import possibleAnswers from "../data/answers.json";
 import { useForm } from "react-hook-form";
 import { Question } from "../types/Question";
-import { useSelector } from "react-redux";
-import { RootState } from "../app/store";
-import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
+import { useFirestore } from "react-redux-firebase";
 import Answer from "../types/Answer";
 
 interface Props {
   question: Question;
+  uid: string;
+  answers: Answer[];
 }
 
-const AnswerGroup: React.FC<Props> = ({ question }) => {
-  useFirestoreConnect([{ collection: "answers" }]);
+const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
   const firestore = useFirestore();
+  const previousAnswerValue =
+    answers.find((a) => a.id === uid)?.[question.id] || 0;
 
-  const uid = useSelector<RootState>((state) => state.firebase.auth.uid);
-  const currentAnswers = useSelector<RootState>(
-    (state) => state.firestore.ordered.answers
-  ) as Answer[];
-
-  const [loaded, setLoaded] = useState(false);
-  const { register, reset, getValues } = useForm();
-  useEffect(() => {
-    console.log("uid", currentAnswers);
-    if (currentAnswers && uid) {
-      const found = currentAnswers?.find((a) => a.id === uid)?.[question.id];
-      if (found && !loaded) {
-        console.log("found");
-
-        reset({
-          [question.id]: found,
-        });
-        setLoaded(true);
-      }
-    }
-  }, [uid, currentAnswers, loaded, question.id, reset]);
-  //   const value = (currentAnswers as Answer[]).find((a) => a.id === uid);
+  const { register, getValues } = useForm({
+    defaultValues: {
+      [question.id]: previousAnswerValue,
+    },
+  });
 
   const handleChange = async () => {
     if (typeof uid === "string") {
-      const values = getValues();
-      await firestore
-        .collection("answers")
-        .doc(uid)
-        .set(getValues(), { merge: true });
-
-      console.log(values);
+      await firestore.update(`answers/${uid}`, getValues());
     }
   };
 
