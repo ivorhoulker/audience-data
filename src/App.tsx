@@ -10,6 +10,7 @@ import AnswerQuestions from "./routes/AnswerQuestions";
 import { useSelector } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
 import { RootState } from "./app/store";
+import Navbar from "./components/Navbar";
 function App() {
   function AuthIsLoaded({ children }: { children: JSX.Element }) {
     const auth = useSelector<RootState>((state) => state.firebase.auth);
@@ -17,36 +18,22 @@ function App() {
     return children;
   }
   return (
-    <div className="App">
-      <header className="App-header">
-        <AuthIsLoaded>
-          <Router>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/set-questions">Set Questions</Link>
-              </li>
-              <li>
-                <Link to="/answer-questions">Answer Questions</Link>
-              </li>
-            </ul>
-            <Switch>
-              <Route exact path="/">
-                <div>Nuthin much</div>
-              </Route>
-              <Route exact path="/set-questions">
-                <SetQuestions />
-              </Route>
-              <Route exact path="/answer-questions">
-                <AnswerQuestions />
-              </Route>
-            </Switch>
-          </Router>
-        </AuthIsLoaded>
-      </header>
-    </div>
+    <AuthIsLoaded>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <div>Nuthin much</div>
+          </Route>
+          <Route exact path="/set-questions">
+            <SetQuestions />
+          </Route>
+          <Route exact path="/answer-questions">
+            <AnswerQuestions />
+          </Route>
+        </Switch>
+      </Router>
+    </AuthIsLoaded>
   );
 }
 

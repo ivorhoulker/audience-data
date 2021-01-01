@@ -9,8 +9,10 @@ interface Answers {
   [key: string]: number;
 }
 
-export function calculateResults(questions: Question[], answers: Answers) {
-  //try to work out max and min possible in each category
+const MAX_ANSWER_STRENGTH = 2;
+const MIN_ANSWER_STRENGTH = -2;
+
+export function calculateMinMaxes(questions: Question[]) {
   const startingMinMaxes = {
     economics: [0, 0],
     culture: [0, 0],
@@ -27,71 +29,89 @@ export function calculateResults(questions: Question[], answers: Answers) {
     const max =
       question.strength > 0
         ? previous[question.category as keyof typeof previous][1] +
-          question.strength * 2
+          question.strength * MAX_ANSWER_STRENGTH
         : previous[question.category as keyof typeof previous][1] +
-          question.strength * -2;
+          question.strength * MIN_ANSWER_STRENGTH;
     const min =
       question.strength < 0
         ? previous[question.category as keyof typeof previous][0] +
-          question.strength * 2
+          question.strength * MAX_ANSWER_STRENGTH
         : previous[question.category as keyof typeof previous][0] +
-          question.strength * -2;
+          question.strength * MIN_ANSWER_STRENGTH;
     const output = { ...previous, [question.category]: [min, max] };
-    console.log("qstrength", question.strength, "output", output);
+
     return output;
   }, startingMinMaxes);
-  console.log("minMaxes: ", minMaxes);
+
+  return minMaxes;
+}
+export function asPercentage(score: number, min: number, max: number) {
+  const range = max - min;
+  return ((score - min) * 100) / range;
+}
+
+export function calculateResults(questions: Question[], answers: Answers) {
+  //minmaxes  will be shifted into a function run onChange of /questions to add the result to a stored min/max value in /results
+  const minMaxes = calculateMinMaxes(questions);
 
   const startingScores: Results = {
     economics: 0,
     culture: 0,
     government: 0,
   };
-  const scores = Object.keys(answers).reduce((previous, id, i, obj) => {
-    //key is the firebase id
-    //answerValue is between -2 and 2, from strongly disagree to strongly agree
-    const question = questions.find((q) => q.id === id);
-    console.log("question", question);
-    if (!question) {
-      return previous;
-    }
-    const answer = answers[id as keyof typeof answers];
-    const change = answer * question.strength;
-    console.log(
-      "answer",
-      answer,
-      "strength",
-      question.strength,
-      "change",
-      change,
-      question.category
-    );
-    //simple because strength is positive or negative depending on question phrasing
-    const modified = {
-      ...previous,
-      [question.category]:
-        previous[question.category as keyof typeof previous] + change,
-    };
-    //this avoids mutation. It's equivalent to saying previous[question.category] += change
-    return modified;
-  }, startingScores);
+  const scores = Object.entries(answers).reduce(
+    (previous, [questionId, answerValue]) => {
+      //key is the firebase id
+      //answerValue is between MIN_ANSWER_STRENGTH and MAX_ANSWER_STRENGTH, from strongly disagree to strongly agree
+      const question = questions.find((q) => q.id === questionId);
+      console.log("question", question);
+      if (!question) {
+        //question has probably been removed since it was answered, so don't count it
+        return previous;
+      }
+      const change = answerValue * question.strength;
+      console.log(
+        "answer",
+        answerValue,
+        "strength",
+        question.strength,
+        "change",
+        change,
+        question.category
+      );
+      //simple because strength is positive or negative depending on question phrasing
+      const score =
+        previous[question.category as keyof typeof previous] + change;
+      const [min, max] = minMaxes[question.category as keyof typeof minMaxes];
+      const scorePercentage = asPercentage(score, min, max);
+
+      const modified = {
+        ...previous,
+        [question.category]: scorePercentage,
+      };
+      //this avoids mutation
+      return modified;
+    },
+    startingScores
+  );
   console.log("scores: ", scores);
-
-  //let's normalise our scores as percentages, with 0 being absolute lefty, 100 being absolute righty
-  const percentages = Object.keys(scores).reduce((previous, category) => {
-    const [min, max] = minMaxes[category as keyof typeof minMaxes];
-    const score = scores[category as keyof typeof minMaxes];
-    const range = max - min;
-
-    const percentage = ((score - min) * 100) / range;
-    const modified = {
-      ...previous,
-      [category]: percentage,
-    };
-
-    return modified;
-  }, startingScores);
-  console.log("data :", percentages);
-
-  return percentages;
 }
+
+//let's normalise our scores as percentages, with 0 being absolute lefty, 100 being absolute righty
+//   const percentages = Object.keys(scores).reduce((previous, category) => {
+//     const [min, max] = minMaxes[category as keyof typeof minMaxes];
+//     const score = scores[category as keyof typeof minMaxes];
+//     const range = max - min;
+
+//     const percentage = ((score - min) * 100) / range;
+//     const modified = {
+//       ...previous,
+//       [category]: percentage,
+//     };
+
+//     return modified;
+//   }, startingScores);
+//   console.log("data :", percentages);
+
+//   return percentages;
+// }

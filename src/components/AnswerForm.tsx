@@ -29,28 +29,30 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
         questions.map((q, i) => {
           return <EditableQuestion key={i} question={q} />;
         })} */}
-      <form>
-        <div className="container-fluid mb-3">
-          {questions &&
-            questions.map((question, i) => (
-              <div key={i} className="card mb-3 bg-light">
-                <div className="card-body">
-                  <div className="col-md-6">
-                    <blockquote>{question.english}</blockquote>
+      <div>
+        <form className="flex flex-wrap justify-between pt-12 -mx-6">
+          <div className="container">
+            {questions &&
+              questions.map((question, i) => (
+                <div key={i} className="container mx-auto">
+                  <div className="card-body">
+                    <div className="col-md-6">
+                      <blockquote>{question.english}</blockquote>
 
-                    {uid && answers && (
-                      <AnswerGroup
-                        question={question}
-                        uid={uid}
-                        answers={answers}
-                      ></AnswerGroup>
-                    )}
+                      {uid && answers && (
+                        <AnswerGroup
+                          question={question}
+                          uid={uid}
+                          answers={answers}
+                        ></AnswerGroup>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-        </div>
-      </form>
+              ))}
+          </div>
+        </form>
+      </div>
     </>
   );
 };
