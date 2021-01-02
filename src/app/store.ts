@@ -25,10 +25,15 @@ interface Profile {
   uid: string;
 }
 
+export interface User {
+  name: string;
+  id: string;
+}
 // This will give you type-checking for state.firebase.data.todos and state.firebase.ordered.todos
 interface FirestoreSchema {
   questions: Question[];
   answers: Answer[];
+  users: User[];
 }
 interface FirebaseSchema {
   auth: { uid: string };

@@ -53,6 +53,7 @@ export const startingScores: Results = {
 };
 
 export function calculateResults(questions: Question[], answers: Answer) {
+  if (!questions || !answers) return null;
   //minmaxes  will be shifted into a function run onChange of /questions to add the result to a stored min/max value in /results
   const minMaxes = calculateMinMaxes(questions);
   const scores: Results = Object.entries(answers).reduce(

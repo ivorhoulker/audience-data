@@ -25,7 +25,7 @@ const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
 
   const handleChange = async () => {
     if (typeof uid === "string") {
-      await firestore.update(`answers/${uid}`, getValues());
+      await firestore.set(`answers/${uid}`, getValues(), { merge: true });
     }
   };
 

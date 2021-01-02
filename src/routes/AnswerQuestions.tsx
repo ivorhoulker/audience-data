@@ -21,7 +21,7 @@ const AnswerQuestions: React.FC<Props> = ({}) => {
     //   category: "economics",
     // });
   }
-  console.log("REDUX QUESTIONS FOR REAL: ", questions);
+
   return (
     <>
       <AnswerForm questions={questions as Question[]} />
