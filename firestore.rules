@@ -15,7 +15,7 @@ service cloud.firestore {
     }
     match /answers/{docId} {
  			allow read: if request.auth.uid != null;
-      allow create, write: if canCreateMessage();
+      allow create, write: if request.auth.uid != null;
     }
     
     function canCreateMessage() {

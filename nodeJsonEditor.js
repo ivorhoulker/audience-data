@@ -34,6 +34,7 @@ const changes = data
       return null;
     }
     delete datum.subcategory;
+    datum.strength = datum.strength * -1;
     const output = { ...datum, chinese: "" };
     return output;
   })
