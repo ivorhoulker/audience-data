@@ -1,91 +1,39 @@
-import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
-
+import React from "react";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/analytics";
 
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import "./App.css";
-import EditableQuestion from "./components/EditableQuestion";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import SetQuestions from "./routes/SetQuestions";
 import AnswerQuestions from "./routes/AnswerQuestions";
-import { auth, firestore } from "./Firebase";
-import sample from "./data/questions-v3-test.json";
-function App() {
-  async function loadData() {
-    const questionsRef = firestore.collection("questions");
-    sample.forEach(async (data) => {
-      const snapshot = await questionsRef
-        .where("english", "==", data.english)
-        .get();
-      if (snapshot.empty) {
-        questionsRef.add(data);
-        // const question = snapshot.docs[0].data();
-        // rest of your code
-      }
-    });
-  }
-  async function signIn() {
-    if (!user) {
-      await auth.signInAnonymously();
-      //loadData updates firebase from the local /data, replacing by english string
-      //no need to call it unless reseeding the whole thing, save money on reads!
-      // loadData();
-    }
-  }
-  const [user] = useAuthState(auth);
-  useEffect(() => {
-    signIn();
-  }, []);
 
+import { useSelector } from "react-redux";
+import { isLoaded } from "react-redux-firebase";
+import { RootState } from "./app/store";
+import Navbar from "./components/Navbar";
+function App() {
+  function AuthIsLoaded({ children }: { children: JSX.Element }) {
+    const auth = useSelector<RootState>((state) => state.firebase.auth);
+    if (!isLoaded(auth)) return <div>splash screen...</div>;
+    return children;
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <Router>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/set-questions">Set Questions</Link>
-            </li>
-            <li>
-              <Link to="/answer-questions">Answer Questions</Link>
-            </li>
-          </ul>
-          <Switch>
-            <Route exact path="/">
-              <div>Nuthin much</div>
-            </Route>
-            <Route
-              exact
-              path="/set-questions"
-              render={() => {
-                return user ? (
-                  <Redirect to="/set-questions" />
-                ) : (
-                  <Redirect to="/" />
-                );
-              }}
-            >
-              <SetQuestions />
-            </Route>
-            <Route exact path="/answer-questions">
-              <AnswerQuestions />
-            </Route>
-          </Switch>
-        </Router>
-      </header>
-    </div>
+    <AuthIsLoaded>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <div>Nuthin much</div>
+          </Route>
+          <Route exact path="/set-questions">
+            <SetQuestions />
+          </Route>
+          <Route exact path="/answer-questions">
+            <AnswerQuestions />
+          </Route>
+        </Switch>
+      </Router>
+    </AuthIsLoaded>
   );
 }
 

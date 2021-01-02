@@ -1,9 +1,11 @@
 export interface Question {
-  id?: string;
+  id: string;
   english: string;
-  chinese?: string;
-  category: string;
+  chinese: string;
+  category: valueOf<typeof Category>;
+  subcategory: valueOf<typeof Subcategory>;
   strength: number;
+  multiplier: number;
 }
 
 type valueOf<T> = T[keyof T];

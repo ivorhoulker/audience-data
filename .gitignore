@@ -10,7 +10,7 @@
 
 # production
 /build
-/src/Firebase.ts
+/src/firebase-config.json
 # misc
 .env
 .DS_Store
