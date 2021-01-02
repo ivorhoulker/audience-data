@@ -45,10 +45,7 @@ const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
                 ref={register}
                 onChange={handleChange}
               />
-              <label
-                className="btn btn-secondary"
-                htmlFor={question.id + answer.key}
-              >
+              <label className="text-base" htmlFor={question.id + answer.key}>
                 {sentenceCase(answer.key)}
               </label>
             </React.Fragment>

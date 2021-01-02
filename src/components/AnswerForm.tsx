@@ -18,8 +18,7 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
   const answers = useSelector<RootState>(
     (state) => state.firestore.ordered.answers
   ) as Answer[];
-  console.log("questions", questions);
-  console.log("answers", answers);
+
   const uid = useSelector<RootState>(
     (state) => state.firebase.auth.uid
   ) as string;
@@ -29,18 +28,9 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
   const users = useSelector<RootState>(
     (state) => state.firestore.ordered.users
   ) as User[];
-  console.log("users", users);
-  useEffect(() => {
-    if (!answers) return;
-    const previousAnswerValue = answers.find((a) => a.id === uid);
-
-    previousAnswerValue &&
-      questions &&
-      console.log(calculateResults(questions, previousAnswerValue));
-  }, [answers, questions]);
 
   const results = useCallback(
-    (answer: Answer, questions: Question[]) => {
+    (answer: Answer) => {
       if (!answer) return;
 
       if (answer && questions) {
@@ -48,7 +38,7 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
       }
     },
 
-    [answers, questions]
+    [questions]
   );
   return (
     <>
@@ -61,25 +51,29 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
           return <EditableQuestion key={i} question={q} />;
         })} */}
       <div>
-        <form className="flex flex-wrap justify-between p-10">
+        <form className="flex flex-wrap justify-between p-10 text-2xl">
           <div className="pb-3">
             <NameForm uid={uid} />
           </div>
           <div className="pb-3">
             {answers &&
               answers.map((answerSet) => {
-                const res = results(answerSet, questions);
+                const res = results(answerSet);
                 const user = users.find((n) => n.id === answerSet.id);
                 return (
                   <div
                     key={answerSet.id}
-                    className={answerSet.id === uid ? " text-capitalize" : ""}
+                    className={answerSet.id === uid ? "" : ""}
                   >
-                    Name: {user?.name ?? ""} User ID: {answerSet.id}
+                    <h2>Name: {user?.name ?? "Anonymous"} </h2>
+                    <small className="text-info">User ID: {answerSet.id}</small>
                     <div>
                       {res &&
                         Object.entries(res).map(([k, r]) => (
-                          <div key={k}>{r ?? ""}%</div>
+                          <small className="pr-3" key={k}>
+                            {k + " "}
+                            {r ?? ""}% /
+                          </small>
                         ))}
                     </div>
                   </div>
@@ -90,9 +84,9 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
             {questions &&
               questions.map((question, i) => (
                 <div key={i} className="container mx-auto">
-                  <div className="card-body">
-                    <div className="col-md-6">
-                      <blockquote>{question.english}</blockquote>
+                  <div className="flex m-3 bg-blue-100">
+                    <div className="col">
+                      <blockquote className="">{question.english}</blockquote>
 
                       {uid && answers && (
                         <AnswerGroup

@@ -25,7 +25,6 @@ const AnswerQuestions: React.FC<Props> = ({}) => {
   return (
     <>
       <AnswerForm questions={questions as Question[]} />
-      <button onClick={createQuestion}>TEst</button>
     </>
   );
 };

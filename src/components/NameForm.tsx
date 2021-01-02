@@ -17,7 +17,7 @@ const NameForm: React.FC<Props> = ({ uid }) => {
 
   const { register, getValues } = useForm({
     defaultValues: {
-      name: "jim",
+      name: "",
     },
   });
 
@@ -29,11 +29,11 @@ const NameForm: React.FC<Props> = ({ uid }) => {
   return (
     <>
       <label className="form-label" htmlFor="name">
-        Name
+        Name:
       </label>
       <input
         onChange={handleChange}
-        className="form-control"
+        className="form-control p-2"
         name={`name`}
         type="text"
         ref={register}
