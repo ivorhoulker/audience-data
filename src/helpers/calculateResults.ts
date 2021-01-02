@@ -1,12 +1,9 @@
+import Answer from "../types/Answer";
 import { Question } from "../types/Question";
 interface Results {
   economics: number;
   culture: number;
   government: number;
-}
-
-interface Answers {
-  [key: string]: number;
 }
 
 const MAX_ANSWER_STRENGTH = 2;
@@ -49,69 +46,71 @@ export function asPercentage(score: number, min: number, max: number) {
   const range = max - min;
   return ((score - min) * 100) / range;
 }
+export const startingScores: Results = {
+  economics: 0,
+  culture: 0,
+  government: 0,
+};
 
-export function calculateResults(questions: Question[], answers: Answers) {
+export function calculateResults(questions: Question[], answers: Answer) {
   //minmaxes  will be shifted into a function run onChange of /questions to add the result to a stored min/max value in /results
   const minMaxes = calculateMinMaxes(questions);
-
-  const startingScores: Results = {
-    economics: 0,
-    culture: 0,
-    government: 0,
-  };
-  const scores = Object.entries(answers).reduce(
+  const scores: Results = Object.entries(answers).reduce(
     (previous, [questionId, answerValue]) => {
       //key is the firebase id
       //answerValue is between MIN_ANSWER_STRENGTH and MAX_ANSWER_STRENGTH, from strongly disagree to strongly agree
       const question = questions.find((q) => q.id === questionId);
-      console.log("question", question);
       if (!question) {
         //question has probably been removed since it was answered, so don't count it
         return previous;
       }
-      const change = answerValue * question.strength;
-      console.log(
-        "answer",
-        answerValue,
-        "strength",
-        question.strength,
-        "change",
-        change,
-        question.category
-      );
+      const change = parseInt(answerValue) * question.strength;
       //simple because strength is positive or negative depending on question phrasing
       const score =
         previous[question.category as keyof typeof previous] + change;
-      const [min, max] = minMaxes[question.category as keyof typeof minMaxes];
-      const scorePercentage = asPercentage(score, min, max);
 
       const modified = {
         ...previous,
-        [question.category]: scorePercentage,
+        [question.category]: score,
       };
+      return modified;
       //this avoids mutation
+      // let's normalise our scores as percentages, with 0 being absolute lefty, 100 being absolute righty
+    },
+    startingScores
+  );
+  const percentages: Results = Object.entries(scores).reduce(
+    (previous, [category, score]) => {
+      const [min, max] = minMaxes[category as keyof typeof minMaxes];
+
+      const range = max - min;
+
+      const percentage = ((score - min) * 100) / range;
+      const modified = {
+        ...previous,
+        [category]: percentage,
+      };
       return modified;
     },
     startingScores
   );
-  console.log("scores: ", scores);
+  return roundResults(percentages);
 }
-
-//let's normalise our scores as percentages, with 0 being absolute lefty, 100 being absolute righty
-//   const percentages = Object.keys(scores).reduce((previous, category) => {
-//     const [min, max] = minMaxes[category as keyof typeof minMaxes];
-//     const score = scores[category as keyof typeof minMaxes];
-//     const range = max - min;
-
-//     const percentage = ((score - min) * 100) / range;
-//     const modified = {
-//       ...previous,
-//       [category]: percentage,
-//     };
-
-//     return modified;
-//   }, startingScores);
-//   console.log("data :", percentages);
-
-//   return percentages;
-// }
+//rounding and calculating percentages in what is effectively an extra loop isn't efficient
+//but can be improved after we decide whether we want percentages baked in or not
+function roundResults(results: Results) {
+  function round(num: number) {
+    return Math.round((num + Number.EPSILON) * 100) / 100;
+  }
+  const rounded: Results = Object.entries(results).reduce(
+    (previous, [category, score]) => {
+      const modified = {
+        ...previous,
+        [category]: round(score),
+      };
+      return modified;
+    },
+    startingScores
+  );
+  return rounded;
+}

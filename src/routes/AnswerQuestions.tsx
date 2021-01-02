@@ -14,12 +14,12 @@ const AnswerQuestions: React.FC<Props> = ({}) => {
   const firestore = useFirestore();
 
   async function createQuestion() {
-    return await firestore.collection("questions").add({
-      english: "test",
-      chinese: "test",
-      strength: 1,
-      category: "economics",
-    });
+    // return await firestore.collection("questions").add({
+    //   english: "test",
+    //   chinese: "test",
+    //   strength: 1,
+    //   category: "economics",
+    // });
   }
   console.log("REDUX QUESTIONS FOR REAL: ", questions);
   return (

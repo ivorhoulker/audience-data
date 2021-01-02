@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useFirestoreConnect } from "react-redux-firebase";
 import { RootState } from "../app/store";
+import { calculateResults } from "../helpers/calculateResults";
+
 import Answer from "../types/Answer";
 
 import { Question } from "../types/Question";
@@ -13,12 +15,23 @@ interface Props {
 
 const AnswerQuestions: React.FC<Props> = ({ questions }) => {
   useFirestoreConnect([{ collection: "answers" }]);
+
   const answers = useSelector<RootState>(
     (state) => state.firestore.ordered.answers
   ) as Answer[];
+  console.log("questions", questions);
+  console.log("answers", answers);
   const uid = useSelector<RootState>(
     (state) => state.firebase.auth.uid
   ) as string;
+  useEffect(() => {
+    if (!answers) return;
+    const previousAnswerValue = answers.find((a) => a.id === uid);
+
+    previousAnswerValue &&
+      questions &&
+      console.log(calculateResults(questions, previousAnswerValue));
+  }, [answers, questions]);
   return (
     <>
       {/* {questionsError && (

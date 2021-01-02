@@ -15,11 +15,11 @@ interface Props {
 const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
   const firestore = useFirestore();
   const previousAnswerValue =
-    answers.find((a) => a.id === uid)?.[question.id] || 0;
+    answers.find((a) => a.id === uid)?.[question.id as keyof Answer] || 0;
 
   const { register, getValues } = useForm({
     defaultValues: {
-      [question.id]: previousAnswerValue,
+      [question.id as keyof Answer]: previousAnswerValue,
     },
   });
 
