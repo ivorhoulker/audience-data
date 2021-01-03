@@ -84,7 +84,7 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
             {questions &&
               questions.map((question, i) => (
                 <div key={i} className="container mx-auto">
-                  <div className="flex m-3 bg-blue-100">
+                  <div className="flex bg-gray-100 p-3 mb-3 rounded shadow-2xl">
                     <div className="col">
                       <blockquote className="">{question.english}</blockquote>
 

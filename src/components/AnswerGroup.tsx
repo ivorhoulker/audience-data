@@ -15,7 +15,7 @@ interface Props {
 const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
   const firestore = useFirestore();
   const previousAnswerValue =
-    answers.find((a) => a.id === uid)?.[question.id as keyof Answer] || 0;
+    answers.find((a) => a.id === uid)?.[question.id as keyof Answer] || "0";
 
   const { register, getValues } = useForm({
     defaultValues: {
@@ -33,11 +33,21 @@ const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
     <>
       <div role="radiogroup" className="btn-group">
         {possibleAnswers.map((answer, i) => {
+          const classNames = () => {
+            let cls =
+              "text-base rounded hover:bg-blue-500 px-3 py-1 transition ease-in duration-150 ";
+            if (answer.value === parseInt(previousAnswerValue)) {
+              cls += "bg-blue-600";
+            } else {
+              cls += "bg-blue-400 ";
+            }
+            return cls;
+          };
           return (
-            <React.Fragment key={i}>
+            <div key={i} className="inline-flex pr-3 pointer-events-auto">
               <input
                 type="radio"
-                className="btn-check"
+                className="hidden"
                 id={question.id + answer.key}
                 name={question.id}
                 value={answer.value}
@@ -45,10 +55,13 @@ const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
                 ref={register}
                 onChange={handleChange}
               />
-              <label className="text-base" htmlFor={question.id + answer.key}>
+              <label
+                className={classNames()}
+                htmlFor={question.id + answer.key}
+              >
                 {sentenceCase(answer.key)}
               </label>
-            </React.Fragment>
+            </div>
           );
         })}
       </div>
