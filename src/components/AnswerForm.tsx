@@ -85,9 +85,9 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
               questions.map((question, i) => (
                 <div
                   key={i}
-                  className="flex flex-col justify-between bg-gray-100 p-3 mb-3 rounded shadow-2xl"
+                  className="flex flex-col  bg-gray-700 mb-5 rounded-2xl shadow-2xl "
                 >
-                  <blockquote className="pb-2">{question.english}</blockquote>
+                  <blockquote className="p-5">{question.english}</blockquote>
 
                   {uid && answers && (
                     <AnswerGroup

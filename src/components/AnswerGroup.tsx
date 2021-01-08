@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { Question } from "../types/Question";
 import { useFirestore } from "react-redux-firebase";
 import Answer from "../types/Answer";
+import RadioInput from "./RadioInput";
 
 interface Props {
   question: Question;
@@ -31,42 +32,25 @@ const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
 
   return (
     <>
-      <div role="radiogroup" className="btn-group">
-        {possibleAnswers.map((answer, i) => {
-          const classNames = () => {
-            let cls =
-              "text-base rounded hover:bg-blue-500 px-3 py-1 transition ease-in duration-150 ";
-            if (answer.value === parseInt(previousAnswerValue)) {
-              cls += "bg-blue-600";
-            } else {
-              cls += "bg-blue-400 ";
+      <div role="radiogroup" className="flex items-stretch">
+        {possibleAnswers.reverse().map((answer, i) => (
+          <RadioInput
+            className={
+              i === 0
+                ? "rounded-bl-xl"
+                : i === possibleAnswers.length - 1
+                ? "rounded-br-xl"
+                : ""
             }
-            return cls;
-          };
-          return (
-            <div
-              key={i}
-              className="inline-flex pr-3 last:pr-0 last:bg-red-100 pointer-events-auto"
-            >
-              <input
-                type="radio"
-                className="hidden"
-                id={question.id + answer.key}
-                name={question.id}
-                value={answer.value}
-                autoComplete="off"
-                ref={register}
-                onChange={handleChange}
-              />
-              <label
-                className={classNames()}
-                htmlFor={question.id + answer.key}
-              >
-                {sentenceCase(answer.key)}
-              </label>
-            </div>
-          );
-        })}
+            key={i}
+            id={question.id}
+            value={"" + answer.value}
+            handleChange={handleChange}
+            checked={answer.value === parseInt(previousAnswerValue)}
+          >
+            {sentenceCase(answer.key)}
+          </RadioInput>
+        ))}
       </div>
     </>
   );

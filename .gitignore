@@ -6,7 +6,7 @@
 .pnp.js
 .eslint
 .firebaserc
-
+.eslintcache
 # testing
 /coverage
 
