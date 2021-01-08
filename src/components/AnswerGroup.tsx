@@ -44,7 +44,10 @@ const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
             return cls;
           };
           return (
-            <div key={i} className="inline-flex pr-3 pointer-events-auto">
+            <div
+              key={i}
+              className="inline-flex pr-3 last:pr-0 last:bg-red-100 pointer-events-auto"
+            >
               <input
                 type="radio"
                 className="hidden"

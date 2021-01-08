@@ -83,20 +83,19 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
           <div>
             {questions &&
               questions.map((question, i) => (
-                <div key={i} className="container mx-auto">
-                  <div className="flex bg-gray-100 p-3 mb-3 rounded shadow-2xl">
-                    <div className="col">
-                      <blockquote className="">{question.english}</blockquote>
+                <div
+                  key={i}
+                  className="flex flex-col justify-between bg-gray-100 p-3 mb-3 rounded shadow-2xl"
+                >
+                  <blockquote className="pb-2">{question.english}</blockquote>
 
-                      {uid && answers && (
-                        <AnswerGroup
-                          question={question}
-                          uid={uid}
-                          answers={answers}
-                        ></AnswerGroup>
-                      )}
-                    </div>
-                  </div>
+                  {uid && answers && (
+                    <AnswerGroup
+                      question={question}
+                      uid={uid}
+                      answers={answers}
+                    ></AnswerGroup>
+                  )}
                 </div>
               ))}
           </div>
