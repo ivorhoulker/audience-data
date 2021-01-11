@@ -12,11 +12,12 @@ import { isLoaded } from "react-redux-firebase";
 import { RootState } from "./store";
 import Home from "../routes/Home";
 import SeeAnswers from "../routes/SeeAnswers";
+import SplashScreen from "../routes/SplashScreen";
 
 function App() {
   function AuthIsLoaded({ children }: { children: JSX.Element }) {
     const auth = useSelector<RootState>((state) => state.firebase.auth);
-    if (!isLoaded(auth)) return <div>splash screen...</div>;
+    if (!isLoaded(auth)) return <SplashScreen />;
     return children;
   }
   return (

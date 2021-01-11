@@ -28,12 +28,10 @@ const NameForm: React.FC<Props> = ({ uid }) => {
   };
   return (
     <>
-      <label className="form-label" htmlFor="name">
-        Name:
-      </label>
+      <label className="form-label" htmlFor="name"></label>
       <input
         onChange={handleChange}
-        className="form-control p-2"
+        className="focus:outline-none bg-transparent text-2xl"
         name={`name`}
         type="text"
         ref={register}

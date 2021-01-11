@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useFirestoreConnect } from "react-redux-firebase";
 import { RootState, User } from "../app/store";
 import { calculateResults } from "../helpers/calculateResults";
-
+import Typing from "react-typing-animation";
 import Answer from "../types/Answer";
 
 import { Question } from "../types/Question";
@@ -52,10 +52,6 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
         })} */}
       <div>
         <form className="flex flex-wrap justify-between p-10 ">
-          {/* <div className="pb-3">
-            <NameForm uid={uid} />
-          </div> */}
-
           <div>
             {questions &&
               questions.map((question, i) => (
