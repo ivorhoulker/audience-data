@@ -1,4 +1,5 @@
 import React, { Ref } from "react";
+import { useForm } from "react-hook-form";
 
 interface Props {
   id: string;
@@ -7,35 +8,37 @@ interface Props {
   checked: boolean;
   children: React.ReactChild;
   className?: string;
+  index: number;
 }
 
 const RadioInput = React.forwardRef<HTMLInputElement, Props>(
-  ({ id, value, handleChange, checked, children, className }, ref) => {
+  ({ index, id, value, handleChange, checked, children, className }, ref) => {
     const classList = () => {
       let cls =
-        "flex items-center justify-center block h-full w-full overflow-hidden text-base text-center hover:bg-green-500 px-3 py-1 transition ease-in duration-150 w-full " +
+        "cursor-pointer pointer-events-auto flex items-center justify-center block h-full w-full overflow-hidden text-base text-center x-3 py-1 transition ease-in duration-150 w-full " +
         className;
       if (checked) {
-        cls += " bg-green-400";
-      } else {
-        cls += " bg-green-700 ";
+        cls += " bg-green-700 hover:bg-green-800 ";
+      } else if (!checked) {
+        cls += " bg-green-900 hover:bg-green-800 ";
       }
+
       return cls;
     };
     return (
       <>
-        <div className=" flex-1 flex-grow pointer-events-auto justify-center items-center ">
+        <div className="flex-1 flex-grow bg-pointer-events-auto justify-center items-center ">
           <input
             type="radio"
             className="hidden"
-            id={id}
+            id={id + "id" + index}
             name={id}
             value={value}
             autoComplete="off"
             ref={ref}
             onChange={handleChange}
           />
-          <label className={classList()} htmlFor={id}>
+          <label className={classList()} htmlFor={id + "id" + index}>
             <span className="py-2 px-1">{children}</span>
           </label>
         </div>

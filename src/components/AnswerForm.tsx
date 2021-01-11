@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useFirestoreConnect } from "react-redux-firebase";
 import { RootState, User } from "../app/store";
 import { calculateResults } from "../helpers/calculateResults";
-
+import Typing from "react-typing-animation";
 import Answer from "../types/Answer";
 
 import { Question } from "../types/Question";
@@ -51,43 +51,17 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
           return <EditableQuestion key={i} question={q} />;
         })} */}
       <div>
-        <form className="flex flex-wrap justify-between p-10 text-2xl">
-          <div className="pb-3">
-            <NameForm uid={uid} />
-          </div>
-          <div className="pb-3">
-            {answers &&
-              answers.map((answerSet) => {
-                const res = results(answerSet);
-                const user = users.find((n) => n.id === answerSet.id);
-                return (
-                  <div
-                    key={answerSet.id}
-                    className={answerSet.id === uid ? "" : ""}
-                  >
-                    <h2>Name: {user?.name ?? "Anonymous"} </h2>
-                    <small className="text-info">User ID: {answerSet.id}</small>
-                    <div>
-                      {res &&
-                        Object.entries(res).map(([k, r]) => (
-                          <small className="pr-3" key={k}>
-                            {k + " "}
-                            {r ?? ""}% /
-                          </small>
-                        ))}
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
+        <form className="flex flex-wrap justify-between p-10 ">
           <div>
             {questions &&
               questions.map((question, i) => (
                 <div
                   key={i}
-                  className="flex flex-col  bg-gray-700 mb-5 rounded-2xl shadow-2xl "
+                  className="flex flex-col bg-gray-700 mb-10 rounded-2xl shadow-2xl "
                 >
-                  <blockquote className="p-5">{question.english}</blockquote>
+                  <blockquote className="text-xl p-12">
+                    {i + 1}. {question.english}
+                  </blockquote>
 
                   {uid && answers && (
                     <AnswerGroup
