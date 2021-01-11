@@ -51,7 +51,7 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
           return <EditableQuestion key={i} question={q} />;
         })} */}
       <div>
-        <form className="flex flex-wrap justify-between p-10 text-2xl">
+        <form className="flex flex-wrap justify-between p-10 ">
           {/* <div className="pb-3">
             <NameForm uid={uid} />
           </div> */}
@@ -61,9 +61,11 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
               questions.map((question, i) => (
                 <div
                   key={i}
-                  className="flex flex-col  bg-gray-700 mb-5 rounded-2xl shadow-2xl "
+                  className="flex flex-col bg-gray-700 mb-10 rounded-2xl shadow-2xl "
                 >
-                  <blockquote className="p-5">{question.english}</blockquote>
+                  <blockquote className="text-xl p-12">
+                    {i + 1}. {question.english}
+                  </blockquote>
 
                   {uid && answers && (
                     <AnswerGroup

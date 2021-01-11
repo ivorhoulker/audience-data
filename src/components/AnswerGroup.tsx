@@ -25,6 +25,7 @@ const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
   });
 
   const handleChange = async () => {
+    console.log("setting answers", uid, getValues());
     if (typeof uid === "string") {
       await firestore.set(`answers/${uid}`, getValues(), { merge: true });
     }
@@ -35,6 +36,7 @@ const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
       <div role="radiogroup" className="flex items-stretch">
         {possibleAnswers.reverse().map((answer, i) => (
           <RadioInput
+            ref={register}
             className={
               i === 0
                 ? "rounded-bl-xl"
@@ -43,6 +45,7 @@ const AnswerGroup: React.FC<Props> = ({ question, uid, answers }) => {
                 : ""
             }
             key={i}
+            index={i}
             id={question.id}
             value={"" + answer.value}
             handleChange={handleChange}
