@@ -4,6 +4,7 @@ import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { Question } from "../types/Question";
+import Page from "../layout/Page";
 interface Props {}
 
 const AnswerQuestions: React.FC<Props> = ({}) => {
@@ -11,21 +12,11 @@ const AnswerQuestions: React.FC<Props> = ({}) => {
   const questions = useSelector<RootState>(
     (state) => state.firestore.ordered.questions
   );
-  const firestore = useFirestore();
-
-  async function createQuestion() {
-    // return await firestore.collection("questions").add({
-    //   english: "test",
-    //   chinese: "test",
-    //   strength: 1,
-    //   category: "economics",
-    // });
-  }
 
   return (
-    <>
+    <Page>
       <AnswerForm questions={questions as Question[]} />
-    </>
+    </Page>
   );
 };
 

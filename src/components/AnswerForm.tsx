@@ -52,34 +52,10 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
         })} */}
       <div>
         <form className="flex flex-wrap justify-between p-10 text-2xl">
-          <div className="pb-3">
+          {/* <div className="pb-3">
             <NameForm uid={uid} />
-          </div>
-          <div className="pb-3">
-            {answers &&
-              answers.map((answerSet) => {
-                const res = results(answerSet);
-                const user = users.find((n) => n.id === answerSet.id);
-                return (
-                  <div
-                    key={answerSet.id}
-                    className={answerSet.id === uid ? "" : ""}
-                  >
-                    <h2>Name: {user?.name ?? "Anonymous"} </h2>
-                    <small className="text-info">User ID: {answerSet.id}</small>
-                    <div>
-                      {res &&
-                        Object.entries(res).map(([k, r]) => (
-                          <small className="pr-3" key={k}>
-                            {k + " "}
-                            {r ?? ""}% /
-                          </small>
-                        ))}
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
+          </div> */}
+
           <div>
             {questions &&
               questions.map((question, i) => (
