@@ -15,6 +15,7 @@ const Home: React.FC<Props> = ({}) => {
   const uid = useSelector<RootState>(
     (state) => state.firebase.auth.uid
   ) as string;
+
   return (
     <Page>
       <Container>
