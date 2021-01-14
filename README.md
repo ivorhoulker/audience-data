@@ -1,8 +1,8 @@
-# Questioner / Audience Data
+# Are You R? / Audience Data
 
 This project is a bit like politcalcompass or sixtriangles - allows for setting and answering of political-themed questions to determine an overall stance for the individual answering them.
 
-## Usage
+## Usa
 
 Deploy with
 

@@ -54,7 +54,7 @@ const AnswerQuestions: React.FC<Props> = ({ questions }) => {
         <form className="flex flex-wrap justify-between p-10 ">
           <div>
             {questions &&
-              questions.map((question, i) => (
+              questions.slice(0, 10).map((question, i) => (
                 <div
                   key={i}
                   className="flex flex-col bg-gray-700 mb-10 rounded-2xl shadow-2xl "
