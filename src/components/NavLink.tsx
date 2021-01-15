@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { matchPath, useRouteMatch } from "react-router";
-import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
+import { useRouteMatch } from "react-router";
+import { useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import { RootState, User } from "../app/store";
 interface Props {

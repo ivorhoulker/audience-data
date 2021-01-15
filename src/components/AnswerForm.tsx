@@ -1,19 +1,16 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
-import { RootState, User } from "../app/store";
-import { calculateResults } from "../helpers/calculateResults";
-import Typing from "react-typing-animation";
+import { RootState } from "../app/store";
 import Answer from "../types/Answer";
 
 import { Question } from "../types/Question";
 
 import AnswerGroup from "./AnswerGroup";
-import NameForm from "./NameForm";
+
 import { useForm } from "react-hook-form";
 import Button from "./Button";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+
 import { useHistory } from "react-router-dom";
 interface Props {
   questions: Question[];

@@ -17,20 +17,18 @@ const schema = yup.object().shape({
 });
 
 const NameForm: React.FC<Props> = ({ uid }) => {
+  //firebase
   useFirestoreConnect([{ collection: "users", doc: uid }]);
-
   const firestore = useFirestore();
-  console.log("uid", uid);
   const userMatches = useSelector<RootState>(
     ({ firestore }) => firestore.data.users && firestore.data.users[uid]
   ) as User;
-  console.log("matches", userMatches);
   const previousName = userMatches?.name ?? "";
-  console.log("prev", previousName);
+
+  //forms
   const {
     register,
     handleSubmit,
-    setError,
     errors,
     watch,
     getValues,
@@ -47,12 +45,14 @@ const NameForm: React.FC<Props> = ({ uid }) => {
       nameRef.current.focus();
       setValue("name", previousName);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previousName]);
   useEffect(() => {
-    //Nothing
     return () => {
+      //update values if user navigates away
       nameRef.current?.value && updateFirestoreIfValid(nameRef.current.value);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateFirestoreIfValid = async (name: string) => {
@@ -71,9 +71,7 @@ const NameForm: React.FC<Props> = ({ uid }) => {
     history.push("/answer");
   };
   const history = useHistory();
-  const handleClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {};
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
