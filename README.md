@@ -15,6 +15,7 @@ npm start
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Live site is [here](https://rooftop-audience-data.web.app/).
+Information about how the firestore database is set up can be found in [database-info](/database-info/)
 
 ## Deploy
 

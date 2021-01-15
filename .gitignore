@@ -9,7 +9,7 @@
 .eslintcache
 # testing
 /coverage
-
+*eslintcache*
 # production
 /build
 /src/firebase-config.json
