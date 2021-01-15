@@ -1,10 +1,9 @@
 import React from "react";
 import Typing from "react-typing-animation";
-import Container from "../layout/Container";
 
 interface Props {}
 
-const SplashScreen: React.FC<Props> = ({}) => {
+const SplashScreen: React.FC<Props> = () => {
   return (
     <div className="flex flex-grow flex-col justify-items-center items-center overflow-y-auto">
       <div className="flex flex-col items-center justify-center h-full">

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./app/store";
+import { store } from "./app/ReduxStore";
 import { Provider } from "react-redux";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -11,7 +11,7 @@ import "firebase/firestore"; // <- needed if using firestore
 import "firebase/functions"; // <- needed if using httpsCallable
 
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
-import firebaseConfig from "./firebase-config.json";
+import firebaseConfig from "./firebase-config.json"; //MAKE SURE YOU GET THIS FILE FROM IVOR
 import { createFirestoreInstance } from "redux-firestore";
 
 firebase.initializeApp(firebaseConfig);

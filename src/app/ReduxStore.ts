@@ -1,4 +1,3 @@
-import { Question } from "./../types/Question";
 import {
   configureStore,
   ThunkAction,
@@ -6,60 +5,16 @@ import {
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
 import {
-  Data,
-  Dictionary,
   FirebaseReducer,
   firebaseReducer,
-  Listeners,
-  ReduxFirestoreQuerySetting,
   getFirebase,
   actionTypes as rrfActionTypes,
 } from "react-redux-firebase";
 import { firestoreReducer, constants as rfConstants } from "redux-firestore";
-import Answer from "../types/Answer";
-// Optional: If you use the user profile option
-
-interface Profile {
-  // name: string;
-  // email: string;
-  uid: string;
-}
-
-export interface User {
-  name: string;
-  id: string;
-  finished: boolean;
-}
-// This will give you type-checking for state.firebase.data.todos and state.firebase.ordered.todos
-interface FirestoreSchema {
-  questions: Question[];
-  answers: Answer[];
-  users: User[];
-}
-interface FirebaseSchema {
-  auth: { uid: string };
-}
-
-export interface CustomFirestoreReducer<
-  Schema extends Record<string, any> = {}
-> {
-  composite?: Data<any | Dictionary<any>>;
-  data: { [T in keyof Schema]: Record<string, Schema[T]> };
-  errors: {
-    allIds: string[];
-    byQuery: any[];
-  };
-  listeners: Listeners;
-  ordered: {
-    [T in keyof Schema]: Array<{ key: string; value: Schema[T] }>;
-  };
-  queries: Data<ReduxFirestoreQuerySetting & (Dictionary<any> | any)>;
-  status: {
-    requested: Dictionary<boolean>;
-    requesting: Dictionary<boolean>;
-    timestamps: Dictionary<number>;
-  };
-}
+import { CustomFirestoreReducer } from "../types/CustomFirestoreReducer";
+import { FirebaseSchema } from "../types/FirebaseSchema";
+import { FirestoreSchema } from "../types/FirestoreSchema";
+import { Profile } from "../types/Profile";
 const extraArgument = {
   getFirebase,
 };

@@ -1,9 +1,9 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useFirestoreConnect } from "react-redux-firebase";
-import { RootState, User } from "../app/store";
-import ProgressBar from "../components/ProgressBar";
-import ResultCard from "../components/ResultCard";
+import { RootState } from "../app/ReduxStore";
+import { User } from "../types/User";
+import ResultCard from "../components/SeeAnswers/ResultCard";
 import { calculateResults } from "../helpers/calculateResults";
 import Container from "../layout/Container";
 import Page from "../layout/Page";
@@ -28,9 +28,6 @@ const SeeAnswers: React.FC = () => {
     (state) => state.firestore.ordered.answers
   ) as Answer[];
 
-  const uid = useSelector<RootState>(
-    (state) => state.firebase.auth.uid
-  ) as string;
   const users = useSelector<RootState>(
     (state) => state.firestore.ordered.users
   ) as User[];

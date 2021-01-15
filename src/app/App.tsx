@@ -1,19 +1,14 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import "firebase/firestore";
 import "firebase/auth";
 // import "firebase/analytics";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
-import PrivateRoute from "./PrivateRoute";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PrivateRoute from "../components/PrivateRoute";
 import { useSelector } from "react-redux";
-import { isLoaded, useFirestoreConnect } from "react-redux-firebase";
-import { RootState, User } from "./store";
-import SplashScreen from "../routes/SplashScreen";
+import { isLoaded } from "react-redux-firebase";
+import { RootState } from "./ReduxStore";
+import SplashScreen from "../components/SplashScreen";
 // import Home from "../routes/Home";
 // const Home = React.lazy(() => import("../routes/Home"));
 

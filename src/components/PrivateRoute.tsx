@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router-dom";
-import SeeAnswers from "../routes/SeeAnswers";
-import { RootState, User } from "./store";
+import { RootState } from "../app/ReduxStore";
+import { User } from "../types/User";
 
 interface Props {
   path: string;

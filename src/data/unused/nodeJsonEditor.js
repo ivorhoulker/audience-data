@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { Z_FILTERED } = require("zlib");
+// const { Z_FILTERED } = require("zlib");
 
 let rawdata = fs.readFileSync("src/data/questions.json");
 let data = JSON.parse(rawdata);

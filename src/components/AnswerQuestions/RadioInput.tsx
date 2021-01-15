@@ -1,6 +1,4 @@
-import React, { Ref } from "react";
-import { useForm } from "react-hook-form";
-
+import React from "react";
 interface Props {
   id: string;
   value: string;
