@@ -18,6 +18,17 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Live site is [here](https://rooftop-audience-data.web.app/).
 Information about how the firestore database is set up can be found in [database-info](/database-info/)
 
+## Documentation
+
+This project uses:
+
+- https://redux-toolkit.js.org/ Redux Toolkit (State management)
+- https://github.com/prescottprue/redux-firestore Redux Firestore (State management)
+- https://github.com/csfrequency/react-firebase-hooks React Firebase Hooks (State management)
+- https://tailwindcss.com/ Tailwind Styling)
+- https://react-hook-form.com/ React Hook Form (Forms)
+- https://reactrouter.com/ React Router (Routing)
+
 ## Deploy
 
 ```bash
