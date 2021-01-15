@@ -18,9 +18,9 @@ const RadioInput = React.forwardRef<HTMLInputElement, Props>(
         "cursor-pointer pointer-events-auto flex items-center justify-center block h-full w-full overflow-hidden text-base text-center x-3 py-1 transition ease-in duration-150 w-full " +
         className;
       if (checked) {
-        cls += " bg-green-700 hover:bg-green-800 ";
+        cls += " bg-green-600 hover:bg-green-700 ";
       } else if (!checked) {
-        cls += " bg-green-900 hover:bg-green-800 ";
+        cls += " bg-green-800 hover:bg-green-700 ";
       }
 
       return cls;
