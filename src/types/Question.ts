@@ -1,4 +1,4 @@
-import Category from "../data/categories-v3.json";
+import Category from "../data/categories.json";
 
 export interface Question {
   id: string;
