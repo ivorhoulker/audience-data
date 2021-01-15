@@ -28,6 +28,7 @@ interface Profile {
 export interface User {
   name: string;
   id: string;
+  finished: boolean;
 }
 // This will give you type-checking for state.firebase.data.todos and state.firebase.ordered.todos
 interface FirestoreSchema {

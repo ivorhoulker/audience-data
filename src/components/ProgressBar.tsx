@@ -29,6 +29,17 @@ const ProgressBar: React.FC<Props> = ({
     }
     return [50, 0, 50];
   };
+  const fakePercentage = () => {
+    return Math.round(Math.abs((percentage - 50) * 2));
+  };
+  const leftClass = () => {
+    if (percentage < 50) return " flex-1 text-white ";
+    return " flex1-1 text-gray-400";
+  };
+  const rightClass = () => {
+    if (percentage > 50) return " text-right flex-1 text-white ";
+    return " text-right flex-1 text-gray-400";
+  };
   return (
     <div className="py-1 w-full px-5">
       <div className="relative h-6">
@@ -39,23 +50,35 @@ const ProgressBar: React.FC<Props> = ({
           ></div>
           <div
             style={{ width: `${widths()[1]}%` }}
-            className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"
-          ></div>
+            className="relative shadow-none text-xs overflow-visible flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"
+          >
+            <span
+              className={
+                percentage < 50
+                  ? "text-right absolute h-full top-0 left-0 right-0 bottom-0 p-1"
+                  : "text-left absolute h-full top-0 left-0 right-0 bottom-0 p-1"
+              }
+            >
+              {fakePercentage()}%
+            </span>
+          </div>
           <div
             style={{ width: `${widths()[2]}%` }}
             className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gray-600"
           ></div>
         </div>
-        <div className="absolute  h-full w-full flex rounded flex mb-2 items-center ">
-          <div className="flex-1">
-            <span className="text-xs font-semibold inline-block text-gray-400">
+        <div className="absolute  h-full w-full rounded flex mb-2 items-center ">
+          <div className={leftClass()}>
+            <span className="px-1 text-xs font-semibold inline-block ">
+              {/* {percentage < 50 && fakePercentage() + "% "} */}
               {leftLabel}
             </span>
           </div>
 
-          <div className="text-right flex-1">
-            <span className="text-xs font-semibold inline-block  text-gray-400">
+          <div className={rightClass()}>
+            <span className="px-1 text-xs font-semibold inline-block ">
               {rightLabel}
+              {/* {percentage > 50 && " " + fakePercentage() + "%"} */}
             </span>
           </div>
         </div>
