@@ -2,24 +2,26 @@
 
 This project is a bit like politcalcompass or sixtriangles - allows for setting and answering of political-themed questions to determine an overall stance for the individual answering them.
 
-## Usa
+## Use
 
-Deploy with
-
-```bash
-npm run deploy
-```
-
-This builds and then deploys directly to firebase.
-
-Run locally with
+Develop locally with:
 
 ```bash
+#install dependencies
+npm i
+#run in dev mode
 npm start
 ```
 
-Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Live site is [here](https://rooftop-audience-data.web.app/).
+
+## Deploy
+
+```bash
+npm run deploy
+#runs firebase deploy, but you would need firebase CLI logged in as Ivor, so don't need to deploy.
+```
 
 ## API
 

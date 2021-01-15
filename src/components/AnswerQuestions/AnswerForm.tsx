@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
-import { RootState } from "../app/store";
-import Answer from "../types/Answer";
+import { RootState } from "../../app/ReduxStore";
+import Answer from "../../types/Answer";
 
-import { Question } from "../types/Question";
+import { Question } from "../../types/Question";
 
 import AnswerGroup from "./AnswerGroup";
 
 import { useForm } from "react-hook-form";
-import Button from "./Button";
+import Button from "../Button";
 
 import { useHistory } from "react-router-dom";
 interface Props {

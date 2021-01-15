@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useRouteMatch } from "react-router";
 import { useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
-import { RootState, User } from "../app/store";
+import { RootState } from "../app/ReduxStore";
+import { User } from "../types/User";
 interface Props {
   to: string;
 }

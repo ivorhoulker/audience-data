@@ -1,10 +1,10 @@
 import React from "react";
-import { sentenceCase } from "../helpers/sentenceCase";
-import possibleAnswers from "../data/answers.json";
-import { appendErrors, useForm } from "react-hook-form";
-import { Question } from "../types/Question";
+import { sentenceCase } from "../../helpers/sentenceCase";
+import possibleAnswers from "../../data/answers.json";
+import { useForm } from "react-hook-form";
+import { Question } from "../../types/Question";
 import { useFirestore } from "react-redux-firebase";
-import Answer from "../types/Answer";
+import Answer from "../../types/Answer";
 import RadioInput from "./RadioInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";

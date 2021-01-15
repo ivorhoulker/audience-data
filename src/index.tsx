@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./app/store";
+import { store } from "./app/ReduxStore";
 import { Provider } from "react-redux";
 import firebase from "firebase/app";
 import "firebase/auth";

@@ -1,17 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Typing from "react-typing-animation";
-import { RootState } from "../app/store";
-import BlinkingCursor from "../components/BlinkingCursor";
+import { RootState } from "../app/ReduxStore";
+
 import NameForm from "../components/NameForm";
 
-import Para from "../components/Para";
+import Para from "../layout/Para";
 import Container from "../layout/Container";
 import Page from "../layout/Page";
 
 interface Props {}
 
-const Home: React.FC<Props> = ({}) => {
+const Home: React.FC<Props> = () => {
   const uid = useSelector<RootState>(
     (state) => state.firebase.auth.uid
   ) as string;

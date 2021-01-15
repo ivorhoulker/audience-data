@@ -1,6 +1,4 @@
-import Page from "./Page";
-import NavLink from "../components/NavLink";
-import { matchPath, useRouteMatch } from "react-router";
+import NavLink from "./NavLink";
 const Navbar: React.FC = () => {
   // const match = useRouteMatch('/:page/:roomId/:carID') as { params: { page: string } };
 
