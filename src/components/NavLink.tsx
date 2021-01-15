@@ -1,11 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { matchPath, useRouteMatch } from "react-router";
+import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
+import { useSelector } from "react-redux";
+import { RootState, User } from "../app/store";
 interface Props {
   to: string;
 }
 
 const NavLink: React.FC<Props> = ({ to, children }) => {
+  const uid = useSelector<RootState>(
+    (state) => state.firebase.auth.uid
+  ) as string;
+  useFirestoreConnect([{ collection: "users", doc: uid }]);
+  const user = useSelector<RootState>(
+    ({ firestore }) => firestore.data.users && firestore.data.users[uid]
+  ) as User;
+
   const match = useRouteMatch("/:page") as { params: { page?: string } };
   const cls = () => {
     let output =
@@ -16,8 +27,12 @@ const NavLink: React.FC<Props> = ({ to, children }) => {
       (match?.params?.page === undefined && to === "/")
     ) {
       output += "text-green-500  pointer-events-none";
+    } else if (!user?.name && to === "/answers") {
+      output += "text-gray-400   pointer-events-none";
+    } else if (!user?.finished && to === "/see-answers") {
+      output += "text-gray-400   pointer-events-none";
     } else {
-      output += "text-gray-400 hover:text-gray-100 pointer-events-auto";
+      output += "text-gray-400  hover:text-gray-100 pointer-events-auto";
     }
     return output;
   };

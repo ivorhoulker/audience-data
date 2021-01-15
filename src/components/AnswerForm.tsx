@@ -1,6 +1,6 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
-import { useFirestoreConnect } from "react-redux-firebase";
+import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { RootState, User } from "../app/store";
 import { calculateResults } from "../helpers/calculateResults";
 import Typing from "react-typing-animation";
@@ -10,68 +10,109 @@ import { Question } from "../types/Question";
 
 import AnswerGroup from "./AnswerGroup";
 import NameForm from "./NameForm";
+import { useForm } from "react-hook-form";
+import Button from "./Button";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useHistory } from "react-router-dom";
 interface Props {
   questions: Question[];
+  uid: string;
 }
 
-const AnswerQuestions: React.FC<Props> = ({ questions }) => {
-  const answers = useSelector<RootState>(
-    (state) => state.firestore.ordered.answers
-  ) as Answer[];
+const AnswerQuestions: React.FC<Props> = ({ questions, uid }) => {
+  useFirestoreConnect([{ collection: "answers" }]);
+  const answers =
+    useSelector<RootState>((state) => state.firestore.data.answers?.[uid]) ??
+    {};
+  const [errors, setErrors] = useState<string[]>([]);
+  const firestore = useFirestore();
+  const { register, getValues } = useForm();
+  const history = useHistory();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const values = getValues();
+    let errors: string[] = [];
+    Object.entries(values).forEach(([key, value]) => {
+      if (!value || value === "0") {
+        errors.push(key);
 
-  const uid = useSelector<RootState>(
-    (state) => state.firebase.auth.uid
-  ) as string;
-  //to select only this user:
-  // useFirestoreConnect([{ collection: "answers", doc: uid }]);
-  useFirestoreConnect([{ collection: "answers" }, { collection: "users" }]);
-  const users = useSelector<RootState>(
-    (state) => state.firestore.ordered.users
-  ) as User[];
-
-  const results = useCallback(
-    (answer: Answer) => {
-      if (!answer) return;
-
-      if (answer && questions) {
-        return calculateResults(questions, answer);
+        return;
       }
-    },
-
-    [questions]
-  );
+    });
+    setErrors(errors);
+    if (errors.length) {
+      try {
+        await firestore.set(
+          `users/${uid}`,
+          { finished: false },
+          { merge: true }
+        );
+      } catch (err) {
+        console.log(err);
+      }
+      console.log("errors", errors);
+      return;
+    }
+    try {
+      await firestore.set(`users/${uid}`, { finished: true }, { merge: true });
+      history.push("/see-answers");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
-      {/* {questionsError && (
-        <strong>Error: {JSON.stringify(questionsError)}</strong>
-      )}
-      {questionsLoading && <span>Collection: Loading...</span>}
-      {questions &&
-        questions.map((q, i) => {
-          return <EditableQuestion key={i} question={q} />;
-        })} */}
       <div>
-        <form className="flex flex-wrap justify-between p-10 ">
+        <form
+          className="flex flex-wrap justify-between p-10 "
+          onSubmit={(e) => handleSubmit(e)}
+        >
           <div>
             {questions &&
-              questions.slice(0, 10).map((question, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col bg-gray-700 mb-10 rounded-2xl shadow-2xl "
-                >
-                  <blockquote className="text-xl p-12">
-                    {i + 1}. {question.english}
-                  </blockquote>
+              questions.slice(0, 10).map((question, i) => {
+                const cls = () => {
+                  let output = "";
+                  if (errors.includes(question.id)) {
+                    output += " ring-2 ring-red-400 ";
+                  }
+                  return output;
+                };
+                return (
+                  <div
+                    key={i}
+                    className={
+                      "flex flex-col bg-gray-700 mb-10 rounded-2xl shadow-2xl overflow-hidden w-full" +
+                      cls()
+                    }
+                  >
+                    <blockquote className="text-xl p-12">
+                      {i + 1}. {question.english}
+                    </blockquote>
 
-                  {uid && answers && (
-                    <AnswerGroup
-                      question={question}
-                      uid={uid}
-                      answers={answers}
-                    ></AnswerGroup>
-                  )}
-                </div>
-              ))}
+                    {uid && answers && (
+                      <AnswerGroup
+                        parentErrors={errors}
+                        register={register}
+                        question={question}
+                        uid={uid}
+                        answers={answers as Answer}
+                      ></AnswerGroup>
+                    )}
+                  </div>
+                );
+              })}
+
+            <div className="flex flex-col items-center w-full">
+              <Button className="mb-6 w-full" type="submit">
+                Submit
+              </Button>
+              {!!errors.length && (
+                <div className="text-red-400">{`${errors.length} question${
+                  errors.length > 1 ? "s" : ""
+                } remaining.`}</div>
+              )}
+            </div>
           </div>
         </form>
       </div>

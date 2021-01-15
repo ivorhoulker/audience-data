@@ -12,10 +12,12 @@ const AnswerQuestions: React.FC<Props> = ({}) => {
   const questions = useSelector<RootState>(
     (state) => state.firestore.ordered.questions
   );
-
+  const uid = useSelector<RootState>(
+    (state) => state.firebase.auth.uid
+  ) as string;
   return (
     <Page>
-      <AnswerForm questions={questions as Question[]} />
+      <AnswerForm uid={uid} questions={questions as Question[]} />
     </Page>
   );
 };

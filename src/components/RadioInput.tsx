@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 interface Props {
   id: string;
   value: string;
-  handleChange: () => void;
+  handleChange?: () => void;
   checked: boolean;
   children: React.ReactChild;
   className?: string;
@@ -36,7 +36,7 @@ const RadioInput = React.forwardRef<HTMLInputElement, Props>(
             value={value}
             autoComplete="off"
             ref={ref}
-            onChange={handleChange}
+            onChange={handleChange ?? undefined}
           />
           <label className={classList()} htmlFor={id + "id" + index}>
             <span className="py-2 px-1">{children}</span>

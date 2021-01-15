@@ -11,9 +11,7 @@ import Answer from "../types/Answer";
 
 import { Question } from "../types/Question";
 
-interface Props {}
-
-const SeeAnswers: React.FC<Props> = ({}) => {
+const SeeAnswers: React.FC = () => {
   //to select only this user:
   // useFirestoreConnect([{ collection: "answers", doc: uid }]);
   useFirestoreConnect([

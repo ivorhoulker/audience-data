@@ -20,61 +20,82 @@ const NameForm: React.FC<Props> = ({ uid }) => {
   useFirestoreConnect([{ collection: "users", doc: uid }]);
 
   const firestore = useFirestore();
+  console.log("uid", uid);
   const userMatches = useSelector<RootState>(
-    ({ firestore: { data } }) => data.users && data.users[uid]
+    ({ firestore }) => firestore.data.users && firestore.data.users[uid]
   ) as User;
+  console.log("matches", userMatches);
   const previousName = userMatches?.name ?? "";
   console.log("prev", previousName);
-  const { register, handleSubmit, setError, errors, getValues } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setError,
+    errors,
+    watch,
+    getValues,
+    setValue,
+  } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      name: previousName,
-    },
   });
+
   //use hook form can assign refs with register like this in order to share the to assign focus
-  const nameRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement | null>();
   useEffect(() => {
     if (nameRef.current) {
-      register(nameRef.current);
+      // register(nameRef.current);
       nameRef.current.focus();
+      setValue("name", previousName);
     }
+  }, [previousName]);
+  useEffect(() => {
+    //Nothing
+    return () => {
+      nameRef.current?.value && updateFirestoreIfValid(nameRef.current.value);
+    };
   }, []);
+
+  const updateFirestoreIfValid = async (name: string) => {
+    console.log(`setting firebase users/${uid} to `, name);
+    await firestore.set(`users/${uid}`, { name }, { merge: true });
+  };
   const handleChange = async () => {
     // if (typeof uid === "string") {
     //   await firestore.set(`users/${uid}`, getValues(), { merge: true });
     // }
   };
   const onSubmit = async () => {
-    if (typeof uid === "string") {
-      const values = getValues();
-      console.log(`setting firebase users/${uid} to `, values);
-      await firestore.set(`users/${uid}`, values, { merge: true });
-    }
-  };
-  const history = useHistory();
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const name = getValues().name ?? previousName;
+    console.log(`setting firebase users/${uid} to `, name);
+    await firestore.set(`users/${uid}`, { name }, { merge: true });
     history.push("/answer");
   };
+  const history = useHistory();
+  const handleClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {};
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className="form-label" htmlFor="name"></label>
         <input
           onChange={handleChange}
+          aria-invalid={errors.name ? "true" : "false"}
           className="focus:outline-none bg-transparent text-2xl mb-12 w-full"
           name={`name`}
           type="text"
-          ref={nameRef}
           defaultValue={previousName}
+          ref={(e) => {
+            register(e);
+            nameRef.current = e; // you can still assign to ref
+          }}
         />
-        {errors.name && errors.name.type === "required" && (
-          <div>Your name is required.</div>
-        )}
-        {!errors.name && getValues().name && (
+        {errors.name && <div>Your name is required.</div>}
+        {watch().name && (
           <>
-            <div className="mb-12 w-full">{`Hello, ${getValues().name}`}.</div>
+            <div className="mb-12 w-full">{`Hello, ${watch().name}`}.</div>
             <div className="w-full">
-              <Button onClick={(e) => handleClick(e)}>Confirm</Button>
+              <Button type="submit">Confirm</Button>
             </div>
           </>
         )}
