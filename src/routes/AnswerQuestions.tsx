@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { Question } from "../types/Question";
 import Page from "../layout/Page";
+import Container from "../layout/Container";
 interface Props {}
 
 const AnswerQuestions: React.FC<Props> = ({}) => {
@@ -17,7 +18,9 @@ const AnswerQuestions: React.FC<Props> = ({}) => {
   ) as string;
   return (
     <Page>
-      <AnswerForm uid={uid} questions={questions as Question[]} />
+      <Container>
+        <AnswerForm uid={uid} questions={questions as Question[]} />
+      </Container>
     </Page>
   );
 };

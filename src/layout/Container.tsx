@@ -6,7 +6,7 @@ interface Props {
 
 const Container: React.FC<Props> = ({ children, className }) => {
   return (
-    <div className={"flex flex-wrap overflow-hidden p-12 " + className}>
+    <div className={"flex flex-wrap  p-12 max-w-5xl w-full " + className}>
       {children}
     </div>
   );

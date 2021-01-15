@@ -63,12 +63,12 @@ const AnswerQuestions: React.FC<Props> = ({ questions, uid }) => {
   };
   return (
     <>
-      <div>
+      <div className="w-full">
         <form
-          className="flex flex-wrap justify-between p-10 "
+          className="flex flex-wrap justify-between w-full "
           onSubmit={(e) => handleSubmit(e)}
         >
-          <div>
+          <div className="w-full">
             {questions &&
               questions.slice(0, 10).map((question, i) => {
                 const cls = () => {
