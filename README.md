@@ -4,6 +4,7 @@ This project is a bit like politcalcompass or sixtriangles - allows for setting 
 
 ## Use
 
+You need the `firebase-config.json` file in `/src`! If you don't have it, ask Ivor for it! It's not in this repo because it's public! Any firebase-related errors are probably caused by this!
 Develop locally with:
 
 ```bash
