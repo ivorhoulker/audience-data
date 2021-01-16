@@ -28,14 +28,12 @@ const AnswerQuestions: React.FC = () => {
     let newErrors: string[] = [];
     Object.entries(values).forEach(([key, value]) => {
       if (!value || value === "0") {
-        errors.push(key);
+        newErrors.push(key);
 
         return;
       }
     });
-    if (errors !== newErrors) {
-      setErrors(errors);
-    }
+    setErrors(newErrors);
     if (newErrors.length) {
       try {
         await firestore.set(
@@ -47,6 +45,7 @@ const AnswerQuestions: React.FC = () => {
         console.log(err);
       }
       console.log("errors", newErrors);
+
       return;
     }
     try {

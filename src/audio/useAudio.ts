@@ -37,6 +37,7 @@ const useAudio = () => {
   const capitalistSequence = useRef<tone.Sequence>();
   //Bass is constant
   const bassSequence = useRef<tone.Sequence>();
+
   const startTone = () => {
     if (!isLoaded) {
       setLoaded(true);
@@ -96,7 +97,7 @@ const useAudio = () => {
     }
   }, [questions, userAnswers]);
 
-  const [prevEcon, setPrevEcon] = useState(50);
+  //MAIN LOGIC
   useEffect(() => {
     if (result && !muted) {
       if (result.culture > 50) {
@@ -120,6 +121,7 @@ const useAudio = () => {
       // loopA.current.start();
     }
   }, [result, muted]);
+  const [prevEcon, setPrevEcon] = useState(50);
 
   const initializeSynths = () => {
     bassSynth.current = new tone.Synth({
@@ -214,10 +216,10 @@ const useAudio = () => {
       },
       //c minor pentatonic
       [
-        ["C2", "B2"],
-        ["C2", "B2"],
-        ["C2", "B2"],
-        ["C2", "B2"],
+        ["C3", "B2"],
+        ["C3", "B2"],
+        ["C3", "B2"],
+        ["C3", "B2"],
       ],
       "2n"
     );
