@@ -9,7 +9,7 @@ import Container from "../layout/Container";
 interface Props {}
 
 const AnswerQuestions: React.FC<Props> = () => {
-  useFirestoreConnect([{ collection: "questions" }]);
+  // useFirestoreConnect([{ collection: "questions" }]);
   const questions = useSelector<RootState>(
     (state) => state.firestore.ordered.questions
   );

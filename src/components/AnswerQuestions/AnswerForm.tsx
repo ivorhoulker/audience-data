@@ -18,7 +18,7 @@ interface Props {
 }
 
 const AnswerQuestions: React.FC<Props> = ({ questions, uid }) => {
-  useFirestoreConnect([{ collection: "answers" }]);
+  // useFirestoreConnect([{ collection: "answers" }]);
   const answers =
     useSelector<RootState>((state) => state.firestore.data.answers?.[uid]) ??
     {};

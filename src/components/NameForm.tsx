@@ -19,7 +19,7 @@ const schema = yup.object().shape({
 
 const NameForm: React.FC<Props> = ({ uid }) => {
   //firebase
-  useFirestoreConnect([{ collection: "users", doc: uid }]);
+  // useFirestoreConnect([{ collection: "users", doc: uid }]);
   const firestore = useFirestore();
   const userMatches = useSelector<RootState>(
     ({ firestore }) => firestore.data.users && firestore.data.users[uid]
