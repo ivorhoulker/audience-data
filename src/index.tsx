@@ -23,8 +23,8 @@ firebase.auth().onAuthStateChanged(async (user) => {
   }
 });
 const rrfConfig = {
-  // userProfile: "users",
-  // useFirestoreForProfile: false, // Firestore for Profile instead of Realtime DB
+  userProfile: "users",
+  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
   // enableClaims: false, // Get custom claims along with the profile
 };
 const rrfProps = {
