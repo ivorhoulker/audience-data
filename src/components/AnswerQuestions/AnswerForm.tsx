@@ -2,26 +2,22 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { RootState } from "../../app/ReduxStore";
-import Answer from "../../types/Answer";
-
 import { Question } from "../../types/Question";
-
 import AnswerGroup from "./AnswerGroup";
-
 import { useForm } from "react-hook-form";
 import Button from "../Button";
 
 import { useHistory } from "react-router-dom";
-interface Props {
-  questions: Question[];
-  uid: string;
-}
 
-const AnswerQuestions: React.FC<Props> = ({ questions, uid }) => {
-  useFirestoreConnect([{ collection: "answers" }]);
-  const answers =
-    useSelector<RootState>((state) => state.firestore.data.answers?.[uid]) ??
-    {};
+const AnswerQuestions: React.FC = () => {
+  useFirestoreConnect([{ collection: "questions" }]);
+  const questions = useSelector<RootState>(
+    (state) => state.firestore.ordered.questions
+  ) as Question[];
+  const uid = useSelector<RootState>(
+    (state) => state.firebase.auth.uid
+  ) as string;
+
   const [errors, setErrors] = useState<string[]>([]);
   const firestore = useFirestore();
   const { register, getValues } = useForm();
@@ -29,16 +25,16 @@ const AnswerQuestions: React.FC<Props> = ({ questions, uid }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const values = getValues();
-    let errors: string[] = [];
+    let newErrors: string[] = [];
     Object.entries(values).forEach(([key, value]) => {
       if (!value || value === "0") {
-        errors.push(key);
+        newErrors.push(key);
 
         return;
       }
     });
-    setErrors(errors);
-    if (errors.length) {
+    setErrors(newErrors);
+    if (newErrors.length) {
       try {
         await firestore.set(
           `users/${uid}`,
@@ -48,7 +44,8 @@ const AnswerQuestions: React.FC<Props> = ({ questions, uid }) => {
       } catch (err) {
         console.log(err);
       }
-      console.log("errors", errors);
+      console.log("errors", newErrors);
+
       return;
     }
     try {
@@ -70,14 +67,14 @@ const AnswerQuestions: React.FC<Props> = ({ questions, uid }) => {
               questions.slice(0, 10).map((question, i) => {
                 const cls = () => {
                   let output = "";
-                  if (errors.includes(question.id)) {
-                    output += " ring-2 ring-red-400 ";
-                  }
+                  // if (errors.includes(question.id)) {
+                  //   output += " ring-2 ring-red-400 ";
+                  // }
                   return output;
                 };
                 return (
                   <div
-                    key={i}
+                    key={question.id + i}
                     className={
                       "flex flex-col bg-gray-700 mb-10 rounded-2xl shadow-2xl overflow-hidden w-full" +
                       cls()
@@ -87,13 +84,12 @@ const AnswerQuestions: React.FC<Props> = ({ questions, uid }) => {
                       {i + 1}. {question.english}
                     </blockquote>
 
-                    {uid && answers && (
+                    {uid && (
                       <AnswerGroup
                         parentErrors={errors}
                         register={register}
                         question={question}
                         uid={uid}
-                        answers={answers as Answer}
                       ></AnswerGroup>
                     )}
                   </div>

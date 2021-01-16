@@ -3,31 +3,30 @@ import { sentenceCase } from "../../helpers/sentenceCase";
 import possibleAnswers from "../../data/answers.json";
 import { useForm } from "react-hook-form";
 import { Question } from "../../types/Question";
-import { useFirestore } from "react-redux-firebase";
+import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import Answer from "../../types/Answer";
 import RadioInput from "./RadioInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/ReduxStore";
 interface Props {
   question: Question;
   uid: string;
-  answers: Answer;
   register: any;
   parentErrors: string[];
 }
 
-const AnswerGroup: React.FC<Props> = ({
-  question,
-  uid,
-  answers,
-  register,
-  parentErrors,
-}) => {
+const AnswerGroup: React.FC<Props> = ({ question, uid, register }) => {
+  useFirestoreConnect([{ collection: "answers" }]);
+  const answers = useSelector<RootState>(
+    (state) => state.firestore.data.answers?.[uid] || {}
+  ) as Answer;
   const schema = yup.object().shape({
     [question.id]: yup.number().required(),
   });
   const firestore = useFirestore();
-  const previousAnswerValue = answers?.[question.id] || "0";
+  const previousAnswerValue = answers[question.id] || "0";
 
   const { register: regThis, getValues } = useForm({
     defaultValues: {
@@ -36,7 +35,8 @@ const AnswerGroup: React.FC<Props> = ({
     resolver: yupResolver(schema),
   });
 
-  const handleChange = async () => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     console.log("setting answers", uid, getValues());
     if (typeof uid === "string") {
       await firestore.set(`answers/${uid}`, getValues(), { merge: true });
@@ -64,7 +64,7 @@ const AnswerGroup: React.FC<Props> = ({
               index={i}
               id={question.id}
               value={"" + answer.value}
-              handleChange={handleChange}
+              handleChange={(e) => handleChange(e)}
               checked={answer.value === parseInt(previousAnswerValue) ?? 0}
             >
               {sentenceCase(answer.key)}

@@ -6,15 +6,18 @@ import { User } from "../types/User";
 
 interface Props {
   path: string;
-  component: React.LazyExoticComponent<React.FC<Props>>;
-  auth: { uid: string };
+  component: React.LazyExoticComponent<React.FC<Props>> | React.FC;
+
   redirectTo: string;
   restrictedPath: string;
   exact?: boolean;
 }
 
 const PrivateRoute: React.FC<Props> = ({ ...props }) => {
-  const { component: Component, redirectTo, auth, path } = props;
+  const auth = useSelector<RootState>((state) => state.firebase.auth) as {
+    uid: string;
+  };
+  const { component: Component, redirectTo, path } = props;
   const user = useSelector<RootState>(
     (state) => state.firestore.data.users?.[auth.uid]
   ) as User;

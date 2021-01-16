@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
+import { useFirestore } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/ReduxStore";
 import { User } from "../types/User";
@@ -19,7 +19,7 @@ const schema = yup.object().shape({
 
 const NameForm: React.FC<Props> = ({ uid }) => {
   //firebase
-  useFirestoreConnect([{ collection: "users", doc: uid }]);
+  // useFirestoreConnect([{ collection: "users", doc: uid }]);
   const firestore = useFirestore();
   const userMatches = useSelector<RootState>(
     ({ firestore }) => firestore.data.users && firestore.data.users[uid]

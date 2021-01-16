@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useRouteMatch } from "react-router";
-import { useFirestoreConnect } from "react-redux-firebase";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../app/ReduxStore";
 import { User } from "../types/User";
@@ -13,7 +13,7 @@ const NavLink: React.FC<Props> = ({ to, children }) => {
   const uid = useSelector<RootState>(
     (state) => state.firebase.auth.uid
   ) as string;
-  useFirestoreConnect([{ collection: "users", doc: uid }]);
+  // useFirestoreConnect([{ collection: "users", doc: uid }]);
   const user = useSelector<RootState>(
     ({ firestore }) => firestore.data.users && firestore.data.users[uid]
   ) as User;

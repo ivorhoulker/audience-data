@@ -2,7 +2,7 @@ import React from "react";
 interface Props {
   id: string;
   value: string;
-  handleChange?: () => void;
+  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checked: boolean;
   children: React.ReactChild;
   className?: string;
