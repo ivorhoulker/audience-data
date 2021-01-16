@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import "firebase/firestore";
 import "firebase/auth";
 // import "firebase/analytics";
@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
 import { RootState } from "./ReduxStore";
 import SplashScreen from "../components/SplashScreen";
+import useAudio from "../audio/useAudio";
+import Navbar from "../components/Navbar";
 // import Home from "../routes/Home";
 // const Home = React.lazy(() => import("../routes/Home"));
 
@@ -18,6 +20,18 @@ function App() {
   const auth = useSelector<RootState>((state) => state.firebase.auth) as {
     uid: string;
   };
+  const muted = useSelector<RootState>((state) => state.audio.muted);
+  const { startTone, stopTone } = useAudio();
+  useEffect(() => {
+    if (!muted) {
+      startTone();
+    } else {
+      stopTone();
+    }
+    return () => {
+      stopTone();
+    };
+  }, [muted]);
   // const user =
   //   isLoaded(auth) &&
   //   useSelector<RootState>((state) => state.firestore.data.users[auth.uid]);

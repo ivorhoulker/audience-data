@@ -1,4 +1,5 @@
 import NavLink from "./NavLink";
+import Unmute from "./Unmute";
 const Navbar: React.FC = () => {
   // const match = useRouteMatch('/:page/:roomId/:carID') as { params: { page: string } };
 
@@ -13,6 +14,9 @@ const Navbar: React.FC = () => {
       </ul>
       <ul className="flex flex-row flex-no-shrink items-center h-full justify-evenly">
         <NavLink to={`/see-answers`}>See Answers</NavLink>
+      </ul>
+      <ul className="flex flex-row flex-no-shrink items-center h-full justify-evenly">
+        <Unmute />
       </ul>
     </nav>
   );
