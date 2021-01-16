@@ -31,6 +31,7 @@ This project uses:
 - https://tailwindcss.com/ Tailwind (Styling)
 - https://react-hook-form.com/ React Hook Form (Forms)
 - https://reactrouter.com/ React Router (Routing)
+- https://tonejs.github.io/ - Tonejs (Audio)
 
 ## Deploy
 

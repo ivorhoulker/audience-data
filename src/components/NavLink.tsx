@@ -40,9 +40,9 @@ const NavLink: React.FC<Props> = ({ to, children }) => {
 
   return (
     <>
-      <li className={cls()}>
-        <Link to={to}>{children}</Link>
-      </li>
+      <Link className={cls()} to={to}>
+        {children}
+      </Link>
     </>
   );
 };
