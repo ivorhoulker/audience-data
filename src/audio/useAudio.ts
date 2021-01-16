@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-import ReactDOM from "react-dom";
+import { useState, useRef } from "react";
 import { Synth, Loop, Transport } from "tone";
 
 const useAudio = () => {
@@ -32,8 +31,6 @@ const useAudio = () => {
     loopA.current.stop();
   };
   return { synth, startTone, isLoaded, Transport, stopTone };
-
-  //   const handleClick = () => sampler.current.triggerAttack("A1");
 };
 
 export default useAudio;

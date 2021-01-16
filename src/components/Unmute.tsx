@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import useAudio from "../audio/useAudio";
-import Button from "./Button";
+import React from "react";
 import { unmute, mute } from "../audio/audioSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../app/ReduxStore";
 
 interface Props {}
 
-const Unmute: React.FC<Props> = ({}) => {
+const Unmute: React.FC<Props> = () => {
   const dispatch: AppDispatch = useDispatch();
   const muted = useSelector<RootState>((state) => state.audio.muted);
 

@@ -1,4 +1,3 @@
-import { AudioState } from "./../audio/audioSlice";
 import {
   configureStore,
   ThunkAction,
@@ -7,19 +6,13 @@ import {
   combineReducers,
 } from "@reduxjs/toolkit";
 import {
-  FirebaseReducer,
   firebaseReducer,
   getFirebase,
   actionTypes as rrfActionTypes,
-  FirestoreReducer,
 } from "react-redux-firebase";
 import { firestoreReducer, constants as rfConstants } from "redux-firestore";
-import { CustomFirestoreReducer } from "../types/CustomFirestoreReducer";
-import { FirebaseSchema } from "../types/FirebaseSchema";
-import { FirestoreSchema } from "../types/FirestoreSchema";
-import { Profile } from "../types/Profile";
 import audioSlice from "../audio/audioSlice";
-import { Reducer } from "react";
+
 const extraArgument = {
   getFirebase,
 };
@@ -42,25 +35,11 @@ const middleware = [
     },
   }),
 ];
-// export interface ApplicationState {
-//   firebase: FirebaseReducer.Reducer<Profile, FirebaseSchema>;
-//   firestore: CustomFirestoreReducer<FirestoreSchema>;
-//   audio: typeof audioSlice;
-// }
-// const recducer: ApplicationState = {
-//   firebase: firebaseReducer as FirebaseReducer.Reducer<FirebaseSchema>,
-//   firestore: firestoreReducer as FirestoreReducer.Reducer<FirestoreSchema>,
-//   audio: audioSlice,
-// };
-// Add firebase to reducers
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer, // <- needed if using firestore
   audio: audioSlice.reducer,
 });
-
-// Create store with reducers and initial state
-// const initialState = {};
 
 export const store = configureStore({
   reducer: rootReducer,
