@@ -1,13 +1,10 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import "firebase/firestore";
 import "firebase/auth";
 // import "firebase/analytics";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "../components/PrivateRoute";
-import { useSelector } from "react-redux";
-import { isLoaded, useFirestoreConnect } from "react-redux-firebase";
-import { RootState } from "./ReduxStore";
 import SplashScreen from "../components/SplashScreen";
 import useAudio from "../audio/useAudio";
 import Home from "../routes/Home";

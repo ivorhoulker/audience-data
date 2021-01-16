@@ -1,19 +1,11 @@
-import { User } from "./../types/User";
 import { Question } from "./../types/Question";
 import { RootState } from "./../app/ReduxStore";
-import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useMemo,
-} from "react";
+import { useFirestoreConnect } from "react-redux-firebase";
+import { useState, useRef, useEffect, useMemo } from "react";
 import * as tone from "tone";
 import { useSelector } from "react-redux";
 import Answer from "../types/Answer";
 import { calculateResults } from "../helpers/calculateResults";
-import { clamp } from "../helpers/clamp";
 
 const useAudio = () => {
   const [isLoaded, setLoaded] = useState(false);
@@ -85,9 +77,6 @@ const useAudio = () => {
   const userAnswers = useSelector<RootState>(
     (state) => state.firestore.data?.answers?.[auth.uid] ?? {}
   ) as Answer;
-  const user = useSelector<RootState>((state) => {
-    return state.firestore.data?.users?.[auth.uid] ?? {};
-  }) as User;
 
   const result = useMemo(() => {
     try {
@@ -121,7 +110,6 @@ const useAudio = () => {
       // loopA.current.start();
     }
   }, [result, muted]);
-  const [prevEcon, setPrevEcon] = useState(50);
 
   const initializeSynths = () => {
     bassSynth.current = new tone.Synth({

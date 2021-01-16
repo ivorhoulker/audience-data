@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
+import { useFirestore } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/ReduxStore";
 import { User } from "../types/User";
