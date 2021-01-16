@@ -15,7 +15,11 @@ import { Question } from "../types/Question";
 const SeeAnswers: React.FC = () => {
   //to select only this user:
   // useFirestoreConnect([{ collection: "answers", doc: uid }]);
-
+  useFirestoreConnect([
+    { collection: "questions" },
+    { collection: "answers" },
+    { collection: "users" },
+  ]);
   const questions = useSelector<RootState>(
     (state) => state.firestore.ordered.questions
   ) as Question[];

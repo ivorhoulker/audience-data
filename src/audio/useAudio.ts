@@ -17,17 +17,25 @@ import { clamp } from "../helpers/clamp";
 
 const useAudio = () => {
   const [isLoaded, setLoaded] = useState(false);
-
+  useFirestoreConnect([
+    { collection: "questions" },
+    { collection: "answers" },
+    { collection: "users" },
+  ]);
   // const chorus = useRef(new Chorus(2, 2, 20));
   // const reverb = useRef(new JCReverb(0.2));
   // const phaser = useRef(new Phaser(0.5, 3, 350));
   const bassSynth = useRef<tone.Synth>();
   const liberalSynth = useRef<tone.Synth>();
+  const traditionalSynth = useRef<tone.Synth>();
   const communistSynth = useRef<tone.FMSynth>();
-  const capitalistSynth = useRef<tone.MetalSynth>();
+  const capitalistSynth = useRef<tone.FMSynth>();
   // const loopA = useRef<tone.Loop>();
-  const capitalistSequence = useRef(tone.Sequence);
+  const traditionalSequence = useRef<tone.Sequence>();
   const liberalSequence = useRef<tone.Sequence>();
+  const communistSequence = useRef<tone.Sequence>();
+  const capitalistSequence = useRef<tone.Sequence>();
+  //Bass is constant
   const bassSequence = useRef<tone.Sequence>();
   const startTone = () => {
     if (!isLoaded) {
@@ -91,27 +99,19 @@ const useAudio = () => {
   const [prevEcon, setPrevEcon] = useState(50);
   useEffect(() => {
     if (result && !muted) {
-      // if (loopA.current && economicsN > 0.5) {
-      //   loopA.current && loopA.current.stop();
-      // } else {
-      //   loopA.current && loopA.current.start();
-      // }
-
-      if (liberalSequence.current && result.economics > 50) {
-        liberalSequence.current.clear().dispose();
-        liberalSequence.current = new tone.Sequence(
-          (time, note) => {
-            capitalistSynth.current?.triggerAttackRelease(note, 0.1, time, 0.4);
-          },
-          ["C4", ["Eb4", "D4", "Eb4"], "G4", ["A4", "G4"]],
-          "2n"
-        );
-        liberalSequence.current.start();
-        // liberalSynth.current?.volume.rampTo(-Infinity, 10);
-      } else if (liberalSequence.current) {
-        liberalSequence.current.clear().dispose();
-
-        // liberalSynth.current?.volume.rampTo(1, 1);
+      if (result.culture > 50) {
+        liberalSynth.current?.volume.rampTo(-Infinity, 0.1);
+        traditionalSynth.current?.volume.rampTo(1, 0.1);
+      } else {
+        liberalSynth.current?.volume.rampTo(1, 0.1);
+        traditionalSynth.current?.volume.rampTo(-Infinity, 0.1);
+      }
+      if (result.economics > 50) {
+        communistSynth.current?.volume.rampTo(-Infinity, 0.1);
+        capitalistSynth.current?.volume.rampTo(1, 0.1);
+      } else {
+        communistSynth.current?.volume.rampTo(1, 0.1);
+        capitalistSynth.current?.volume.rampTo(-Infinity, 0.1);
       }
       // loopA.current.dispose();
       // loopA.current = new Loop((time) => {
@@ -138,6 +138,14 @@ const useAudio = () => {
         release: 0.8,
       },
     }).toDestination();
+    traditionalSynth.current = new tone.Synth({
+      envelope: {
+        attack: 0.5,
+        decay: 0.2,
+        sustain: 0.3,
+        release: 0.8,
+      },
+    }).toDestination();
     communistSynth.current = new tone.FMSynth({
       envelope: {
         attack: 0.3,
@@ -146,7 +154,7 @@ const useAudio = () => {
         release: 0.8,
       },
     }).toDestination();
-    capitalistSynth.current = new tone.MetalSynth({
+    capitalistSynth.current = new tone.FMSynth({
       envelope: {
         attack: 0.3,
         decay: 0.2,
@@ -171,11 +179,50 @@ const useAudio = () => {
       (time, note) => {
         liberalSynth.current?.triggerAttackRelease(note, 0.1, time, 0.4);
       },
+      //c major pentatonic
       ["C4", ["E4", "D4", "E4"], "G4", ["A4", "G4"]],
       "2n"
     );
     liberalSequence.current.humanize = true;
     liberalSequence.current.start();
+
+    traditionalSequence.current = new tone.Sequence(
+      (time, note) => {
+        traditionalSynth.current?.triggerAttackRelease(note, 0.1, time, 0.4);
+      },
+      //c minor pentatonic
+      ["C4", ["F4", "Eb4", "F4"], "G4", ["Bb4", "G4"]],
+      "2n"
+    );
+    traditionalSequence.current.humanize = true;
+    traditionalSequence.current.start();
+
+    communistSequence.current = new tone.Sequence(
+      (time, note) => {
+        communistSynth.current?.triggerAttackRelease(note, 0.1, time, 0.6);
+      },
+      //c minor pentatonic
+      ["C3", "C3", ["C3", "C3"], "C3"],
+      "2n"
+    );
+    communistSequence.current.humanize = true;
+    communistSequence.current.start();
+
+    capitalistSequence.current = new tone.Sequence(
+      (time, note) => {
+        capitalistSynth.current?.triggerAttackRelease(note, 0.1, time, 0.6);
+      },
+      //c minor pentatonic
+      [
+        ["C2", "B2"],
+        ["C2", "B2"],
+        ["C2", "B2"],
+        ["C2", "B2"],
+      ],
+      "2n"
+    );
+    capitalistSequence.current.humanize = true;
+    capitalistSequence.current.start();
   };
 
   return { synth: bassSynth, startTone, isLoaded, stopTone };
