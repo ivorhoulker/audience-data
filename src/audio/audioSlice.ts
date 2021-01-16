@@ -11,10 +11,14 @@ const audioSlice = createSlice({
   initialState,
   reducers: {
     unmute(state) {
-      state.muted = false;
+      if (state.muted) {
+        state.muted = false;
+      }
     },
     mute(state) {
-      state.muted = true;
+      if (!state.muted) {
+        state.muted = true;
+      }
     },
   },
 });
